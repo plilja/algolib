@@ -1,8 +1,3 @@
-/*
- * Author: Patrik Lilja
- * Date: 07-09-18
- */ 
-
 #include <iostream>
 #include <math.h>
 #include <queue>

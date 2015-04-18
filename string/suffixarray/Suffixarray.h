@@ -1,12 +1,6 @@
-/*
- * Author: Patrik Lilja
- * Date: 07-09-18
- */ 
+#pragma once
 
-#ifndef SUFFIXARRAY_H_
-#define SUFFIXARRAY_H_
 #include <string>
-//#include <math.h>
 #include <vector>
 using namespace std;
 
@@ -26,4 +20,3 @@ private:
 	int size;
 };
 
-#endif /*SUFFIXARRAY_H_*/
