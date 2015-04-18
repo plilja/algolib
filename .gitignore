@@ -37,3 +37,5 @@
 bin/
 Debug/
 Contents/
+
+*.bak
