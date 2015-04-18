@@ -1,0 +1,206 @@
+/*
+ * Author: Patrik Lilja
+ * Date: 07-09-16
+ */ 
+
+#include <iostream>
+#include <math.h>
+#include <string>
+#include <vector>
+//#define NDEBUG //Do we wan't assertions?
+#include <cassert>
+#include <queue>
+
+#include "TrieNode.h"
+//#include "TrieNode.cpp"
+
+using namespace std;
+
+int maxc=123;
+
+#define INF 2147483647
+
+TrieNode* constructKeywordTree(vector<string> patterns)
+{
+	string s;
+	uchar c;
+	TrieNode* root= new TrieNode();
+	TrieNode* current=root;
+	TrieNode *tmp;
+	//cout<<"root: "<<root<<endl;
+	vector<string>::iterator it;
+	string::iterator sit;
+	int i=0;
+	for(it=patterns.begin(); it!=patterns.end(); it++)
+	{
+		s=*it;
+		//cout<<s<<endl;
+		current=root;
+		for(sit=s.begin(); sit!=s.end(); sit++)
+		{
+			c=*sit;
+			if(current->hasBridge(c))
+			{
+				current=current->getBridge(c);
+			}
+			else
+			{
+				tmp=new TrieNode(root);
+//				cout<<"rootaddr: "<<root<<" curraddr: "<<current<<" tmpaddr: "<<tmp<<" lagger till "<<c<<endl;
+				current->addBridge(c, tmp);
+				assert(current->hasBridge(c));
+				current=tmp; 
+			}
+		//	cout<<c<<" "<<current<<endl;
+		}
+		current->addEndWord(i);
+		i++;
+	}
+	return root;
+}
+
+void constructFailTransitions(TrieNode* root)
+{
+	queue<TrieNode*> q;
+	TrieNode *t, *v, *u, *goFail;
+	for(uchar i=0; i<maxc; i++)
+	{
+		if(root->hasBridge(i))
+		{
+			t=root->getBridge(i);
+			q.push(t);
+			t->setFail(root);
+		}
+	}
+	uchar i;
+	while(!q.empty())
+	{
+		t=q.front();
+		//cout<<"test "<<t->getEndWords()->size()<<endl;
+		q.pop();
+		for(map<uchar, TrieNode*>::iterator it=t->getTransitions().begin(); it!=t->getTransitions().end(); it++)
+		{
+			
+			
+		} 
+		for(uchar i=0; i<maxc; i++)
+		{
+			if(t->hasBridge(i))
+			{
+				u=t->getBridge(i);
+				q.push(u);
+				v=t->getFail();
+				while(v!=root && !(v->hasBridge(i)))
+				{
+					//cout<<"test2 "<<v->getEndWords()->size()<<endl;
+					v=v->getFail();
+				}
+				goFail=v->getBridge(i);
+				u->setFail(goFail);
+				//cout<<"test "<<goFail->getEndWords()->size()<<endl;
+				u->mergeEndWords(goFail);
+			}
+		}
+	}
+}
+
+void printTrie(uchar c, TrieNode *t)
+{
+	cout<<"Address "<<t<<" The following indexes end in "<<c<<" ";
+	for(set<int>::iterator it=t->getEndWords()->begin(); it!=t->getEndWords()->end(); it++)
+	{
+		cout<<*it<<" ";
+	}
+	cout<<endl;
+	cout<<"Fail transition for character "<<c<<" is "<<t->getFail()<<endl;
+	queue<TrieNode*> q;
+	for(uchar i=0; i<maxc; i++)
+	{
+		if(t->hasBridge(i))
+		{
+			cout<<"Character "<<c<<" has pointer to "<<i<<" ending indexes: ";
+			cout<<endl;
+			printTrie(i, t->getBridge(i));
+		}
+	}
+	
+	
+	
+}
+
+vector< vector<int> > ahocorasick(string text, vector<string> patterns)
+{
+	int *lengths=new int[patterns.size()];
+	int i=0;
+	for(vector<string>::iterator it=patterns.begin(); it!=patterns.end(); it++)
+	{
+		lengths[i]=it->length();
+		i++;
+	}
+	i=0;
+	TrieNode* root=constructKeywordTree(patterns);
+	constructFailTransitions(root);
+	TrieNode* state=root;
+	string::iterator it;
+	uchar c;
+	set<int>::iterator sit;
+	vector< vector<int> > ans(patterns.size());	
+	for(it=text.begin(); it!=text.end(); it++)
+	{
+		c=*it;
+		while(state!=root && !(state->hasBridge(c)))
+		{
+			state=state->getFail();
+		}
+		state=state->getBridge(c);
+		for(sit=state->getEndWords()->begin(); sit!=state->getEndWords()->end(); sit++)
+		{
+		//	cout<<"jippii"<<endl;
+			ans[*sit].push_back(i-lengths[*sit]+1);
+		}
+		i++;
+	}
+	//printTrie(' ',root);
+	delete[] lengths;
+	return ans;
+}
+
+
+
+int main()
+{	
+	vector< vector<int> > ans;
+	vector< vector<int> >::iterator oit;
+	vector<int>::iterator iit;
+	
+	vector<string> patterns;
+	int nrOfPatterns;
+	//string s, text;
+	char s[100020], text[200020]; 
+	while(!cin.eof())
+	{
+		patterns.clear();
+		cin>>nrOfPatterns;
+		if(cin.eof())
+		{
+			break;
+		}
+		while('\n'!=cin.get()){}
+		for(int i=0; i<nrOfPatterns; i++)
+		{
+			cin.getline(s, 100010);
+			patterns.push_back((string) s);
+		}
+		cin.getline(text, 200010);
+		ans=ahocorasick(text, patterns);
+		for(oit=ans.begin(); oit!=ans.end(); oit++)
+		{
+			for(iit=oit->begin(); iit!=oit->end(); iit++)
+			{
+				cout<<*iit<<" ";
+			}
+			cout<<endl;
+		}
+		ans.clear();
+	}
+}

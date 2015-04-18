@@ -1,0 +1,91 @@
+#include "knapsack.h"
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+
+using namespace std;
+
+
+//use a one-dimensional array x as a twodiemsional, i.e. x[a][b], l=length(x[*]) 
+#define M_ARR(x, l, a, b) x[(a)*(l) + (b)]
+
+bool by_weight(const pair<pair<int, int>, int>& a, const pair<pair<int, int>, int>& b)
+{
+	return a.first.second < b.first.second;
+
+}
+
+shared_ptr<vector<int>> knapsack_internal(int sack_capacity, int first_allowed_item, vector<pair<pair<int, int>, int>> items, map<pair<int, int>, shared_ptr<vector<int>>> solutions_cache)
+{
+	if (solutions_cache.count({sack_capacity, first_allowed_item}) > 0)
+		return solutions_cache[{sack_capacity, first_allowed_item}];
+	int best_solution = 0;
+	for (uint i = 0; i < items.size(); ++i)
+	{
+		
+	}
+
+
+	return best_solution;
+}
+
+shared_ptr<vector<int> > knapsack(int sack_capacity, vector<pair<int, int> > items)
+{
+	map<pair<int, shared_ptr<int>>, vector<int>> solutions_cache;
+	vector<pair<pair<int, int>, int>> items_sorted;
+	for (uint i = 0; i < items.size(); ++i)
+	{
+		items_sorted.push_back({items[i], i});
+	}
+	sort(items.begin(), items.end(), by_weight);
+	return knapsack_internal(sack_capacity, items_sorted, solutions_cache);
+}
+
+	
+
+unique_ptr<vector<int> > knapsack2(int sack_capacity, vector<pair<int, int> > items)
+{
+	int *maxv=new int[sack_capacity + 1]; 
+	for (int i = 0; i <= sack_capacity; ++i)
+		maxv[i] = 0;
+
+	vector<vector<int>> maxv(items.size() + 1);
+	for (uint i = 0; i < maxv.count(); ++i)
+	{
+		maxv[i] = *(new vector<int>(sack_capacity + 1));
+	}
+	for (uint i = 0; i < items.size(); ++i)
+	{
+		auto item = items[i];
+		int value = item.first;
+		int weight = item.second;
+
+		for(int j = 0; j <= sack_capacity; ++j)
+		{
+			if (weight <= j)
+				maxv[j] = max(maxv[j], maxv[j - weight] + value);
+		}
+	}
+
+	unique_ptr<vector<int> > ans = unique_ptr<vector<int> >(new vector<int>());
+	int capacity_left = sack_capacity;
+	uint next_obj_to_check = 0;
+	while (capacity_left > 0)
+	{
+		for (; next_obj_to_check < items.size(); ++next_obj_to_check)
+		{
+			auto item = items[next_obj_to_check];
+			int value = item.first;
+			int weight = item.second;
+			if (item.second <= capacity_left && maxv[capacity_left] == maxv[capacity_left - weight] + value)
+			{
+				capacity_left -= weight;
+				ans->push_back(next_obj_to_check);
+			}
+		}
+
+	}
+	delete maxv;
+	return ans;
+}

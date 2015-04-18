@@ -1,0 +1,224 @@
+        -:    0:Source:stringmultimatching.cpp
+        -:    0:Graph:stringmultimatching.gcno
+        -:    0:Data:stringmultimatching.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*
+        -:    2: * Author: Patrik Lilja
+        -:    3: * Date: 07-09-16
+        -:    4: */ 
+        -:    5:
+        -:    6:#include <iostream>
+        -:    7:#include <math.h>
+        -:    8:#include <string>
+        -:    9:#include <vector>
+        -:   10://#define NDEBUG //Do we wan't assertions?
+        -:   11:#include <cassert>
+        -:   12:#include <queue>
+        -:   13:
+        -:   14:#include "TrieNode.h"
+        -:   15://#include "TrieNode.cpp"
+        -:   16:
+        -:   17:using namespace std;
+        -:   18:
+        -:   19:int maxc=123;
+        -:   20:
+        -:   21:#define INF 2147483647
+        -:   22:
+        1:   23:TrieNode* constructKeywordTree(vector<string> patterns)
+        -:   24:{
+        1:   25:	string s;
+        -:   26:	uchar c;
+        1:   27:	TrieNode* root= new TrieNode();
+        1:   28:	TrieNode* current=root;
+        -:   29:	TrieNode *tmp;
+        -:   30:	//cout<<"root: "<<root<<endl;
+        1:   31:	vector<string>::iterator it;
+        1:   32:	string::iterator sit;
+        1:   33:	int i=0;
+       14:   34:	for(it=patterns.begin(); it!=patterns.end(); it++)
+        -:   35:	{
+       12:   36:		s=*it;
+        -:   37:		//cout<<s<<endl;
+       12:   38:		current=root;
+   100011:   39:		for(sit=s.begin(); sit!=s.end(); sit++)
+        -:   40:		{
+    99999:   41:			c=*sit;
+    99999:   42:			if(current->hasBridge(c))
+        -:   43:			{
+       23:   44:				current=current->getBridge(c);
+        -:   45:			}
+        -:   46:			else
+        -:   47:			{
+    99976:   48:				tmp=new TrieNode(root);
+        -:   49://				cout<<"rootaddr: "<<root<<" curraddr: "<<current<<" tmpaddr: "<<tmp<<" lagger till "<<c<<endl;
+    99976:   50:				current->addBridge(c, tmp);
+    99976:   51:				assert(current->hasBridge(c));
+    99976:   52:				current=tmp; 
+        -:   53:			}
+        -:   54:		//	cout<<c<<" "<<current<<endl;
+        -:   55:		}
+       12:   56:		current->addEndWord(i);
+       12:   57:		i++;
+        -:   58:	}
+        1:   59:	return root;
+        -:   60:}
+        -:   61:
+        1:   62:void constructFailTransitions(TrieNode* root)
+        -:   63:{
+        1:   64:	queue<TrieNode*> q;
+        -:   65:	TrieNode *t, *v, *u, *goFail;
+      124:   66:	for(uchar i=0; i<maxc; i++)
+        -:   67:	{
+      123:   68:		if(root->hasBridge(i))
+        -:   69:		{
+        6:   70:			t=root->getBridge(i);
+        6:   71:			q.push(t);
+        6:   72:			t->setFail(root);
+        -:   73:		}
+        -:   74:	}
+        -:   75:	uchar i;
+    99978:   76:	while(!q.empty())
+        -:   77:	{
+    99976:   78:		t=q.front();
+        -:   79:		//cout<<"test "<<t->getEndWords()->size()<<endl;
+    99976:   80:		q.pop();
+   199946:   81:		for(map<uchar, TrieNode*>::iterator it=t->getTransitions()->begin(); it!=t->getTransitions()->end(); it++)
+        -:   82:		{
+    99970:   83:			i=it->first;
+    99970:   84:			u=it->second;
+    99970:   85:			q.push(u);
+    99970:   86:			v=t->getFail();
+   237408:   87:			while(v!=root && !(v->hasBridge(i)))
+        -:   88:			{
+        -:   89:				//cout<<"test2 "<<v->getEndWords()->size()<<endl;
+    37468:   90:				v=v->getFail();
+        -:   91:			}
+    99970:   92:			goFail=v->getBridge(i);
+    99970:   93:			u->setFail(goFail);
+        -:   94:			//cout<<"test "<<goFail->getEndWords()->size()<<endl;
+    99970:   95:			u->mergeEndWords(goFail);
+        -:   96:			
+        -:   97:		} 
+        -:   98:		/*for(uchar i=0; i<maxc; i++)
+        -:   99:		{
+        -:  100:			if(t->hasBridge(i))
+        -:  101:			{
+        -:  102:				u=t->getBridge(i);
+        -:  103:				q.push(u);
+        -:  104:				v=t->getFail();
+        -:  105:				while(v!=root && !(v->hasBridge(i)))
+        -:  106:				{
+        -:  107:					//cout<<"test2 "<<v->getEndWords()->size()<<endl;
+        -:  108:					v=v->getFail();
+        -:  109:				}
+        -:  110:				goFail=v->getBridge(i);
+        -:  111:				u->setFail(goFail);
+        -:  112:				//cout<<"test "<<goFail->getEndWords()->size()<<endl;
+        -:  113:				u->mergeEndWords(goFail);
+        -:  114:			}
+        -:  115:		}*/
+        1:  116:	}
+        1:  117:}
+        -:  118:
+    #####:  119:void printTrie(uchar c, TrieNode *t)
+        -:  120:{
+    #####:  121:	cout<<"Address "<<t<<" The following indexes end in "<<c<<" ";
+    #####:  122:	for(set<int>::iterator it=t->getEndWords()->begin(); it!=t->getEndWords()->end(); it++)
+        -:  123:	{
+    #####:  124:		cout<<*it<<" ";
+        -:  125:	}
+    #####:  126:	cout<<endl;
+    #####:  127:	cout<<"Fail transition for character "<<c<<" is "<<t->getFail()<<endl;
+    #####:  128:	queue<TrieNode*> q;
+    #####:  129:	for(uchar i=0; i<maxc; i++)
+        -:  130:	{
+    #####:  131:		if(t->hasBridge(i))
+        -:  132:		{
+    #####:  133:			cout<<"Character "<<c<<" has pointer to "<<i<<" ending indexes: ";
+    #####:  134:			cout<<endl;
+    #####:  135:			printTrie(i, t->getBridge(i));
+        -:  136:		}
+    #####:  137:	}
+        -:  138:	
+        -:  139:	
+        -:  140:	
+    #####:  141:}
+        -:  142:
+        1:  143:vector< vector<int> > ahocorasick(string text, vector<string> patterns)
+        -:  144:{
+        1:  145:	int *lengths=new int[patterns.size()];
+        1:  146:	int i=0;
+       13:  147:	for(vector<string>::iterator it=patterns.begin(); it!=patterns.end(); it++)
+        -:  148:	{
+       12:  149:		lengths[i]=it->length();
+       12:  150:		i++;
+        -:  151:	}
+        1:  152:	i=0;
+        1:  153:	TrieNode* root=constructKeywordTree(patterns);
+        1:  154:	constructFailTransitions(root);
+        1:  155:	TrieNode* state=root;
+        1:  156:	string::iterator it;
+        -:  157:	uchar c;
+        1:  158:	set<int>::iterator sit;
+        2:  159:	vector< vector<int> > ans(patterns.size());	
+   188498:  160:	for(it=text.begin(); it!=text.end(); it++)
+        -:  161:	{
+   188496:  162:		c=*it;
+   462075:  163:		while(state!=root && !(state->hasBridge(c)))
+        -:  164:		{
+    85083:  165:			state=state->getFail();
+        -:  166:		}
+   188496:  167:		state=state->getBridge(c);
+   215983:  168:		for(sit=state->getEndWords()->begin(); sit!=state->getEndWords()->end(); sit++)
+        -:  169:		{
+        -:  170:		//	cout<<"jippii"<<endl;
+    27487:  171:			ans[*sit].push_back(i-lengths[*sit]+1);
+        -:  172:		}
+   188496:  173:		i++;
+        -:  174:	}
+        -:  175:	//printTrie(' ',root);
+        1:  176:	delete[] lengths;
+    #####:  177:	return ans;
+        -:  178:}
+        -:  179:
+        -:  180:
+        -:  181:
+        1:  182:int main()
+        -:  183:{	
+        1:  184:	vector< vector<int> > ans;
+        1:  185:	vector< vector<int> >::iterator oit;
+        1:  186:	vector<int>::iterator iit;
+        -:  187:	
+        2:  188:	vector<string> patterns;
+        -:  189:	int nrOfPatterns;
+        -:  190:	//string s, text;
+        -:  191:	char s[100020], text[200020]; 
+        3:  192:	while(!cin.eof())
+        -:  193:	{
+        1:  194:		patterns.clear();
+        1:  195:		cin>>nrOfPatterns;
+        1:  196:		if(cin.eof())
+        -:  197:		{
+    #####:  198:			break;
+        -:  199:		}
+        1:  200:		while('\n'!=cin.get()){}
+       26:  201:		for(int i=0; i<nrOfPatterns; i++)
+        -:  202:		{
+       12:  203:			cin.getline(s, 100010);
+       12:  204:			patterns.push_back((string) s);
+        -:  205:		}
+        1:  206:		cin.getline(text, 200010);
+        1:  207:		ans=ahocorasick(text, patterns);
+       13:  208:		for(oit=ans.begin(); oit!=ans.end(); oit++)
+        -:  209:		{
+    27499:  210:			for(iit=oit->begin(); iit!=oit->end(); iit++)
+        -:  211:			{
+    27487:  212:				cout<<*iit<<" ";
+        -:  213:			}
+       12:  214:			cout<<endl;
+        -:  215:		}
+        1:  216:		ans.clear();
+        1:  217:	}
+        2:  218:}
+        1:  219:/*EOF*/
