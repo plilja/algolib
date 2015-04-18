@@ -1,7 +1,4 @@
 /*
- * Author: Patrik Lilja
- * Date: 07-09-30
- * 
  * A class that holds the representation of a graph and is able to answer questions 
  * about the minimum distance between a predetermined source and some goal node and
  * also produce a path of that minimum distance. 

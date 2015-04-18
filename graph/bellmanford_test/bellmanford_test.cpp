@@ -1,17 +1,9 @@
-/*
- * Author: Patrik Lilja
- * Date: 07-09-26
- * 
- * Se page:
- * http://kattis.csc.kth.se/problem?id=shortestpath3
- * for a problem description.
- */
 #include <cstdio>
 #include <iostream>
 #define NDEBUG
 #include <cassert>
 #include <vector>
-#include "BellmanFord.h"
+#include "../bellmanford.h"
 #include <string>
 #include <queue>
 #include <limits>
@@ -21,11 +13,6 @@
 
 using namespace std;
 
-/*
- * Se page:
- * http://kattis.csc.kth.se/problem?id=shortestpath3
- * for a problem description. 
- */
 int main()
 {
 	int nrOfNodes, nrOfEdges, cost, goal;
@@ -33,7 +20,6 @@ int main()
 	Bellmanford *bf;
 	vector<pair<pair<int,int>, double> > nodes;
 	int ans;
-	//generateCase(nrOfNodes, nrOfEdges, source, goal, nodes);
 	while(4==scanf("%d %d %d %d", &nrOfNodes, &nrOfEdges, &queries, &source))
 	{
 		if(nrOfNodes==0 && nrOfEdges==0 && queries==0 && source==0)
@@ -77,7 +63,7 @@ int main()
 			}
 		}
 		delete bf;
-		cout<<endl;
+        printf("\n");
 	}
 	return 0;
 	

@@ -1,8 +1,4 @@
-/*
- * Author: Patrik Lilja
- * Date: 07-09-30
- */ 
-#include "BellmanFord.h"
+#include "bellmanford.h"
 #include <cstdio>
 #include <iostream>
 #include <vector>
