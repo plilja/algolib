@@ -1,6 +1,3 @@
-/*
- * Group: Patrik Lilja, Martin Tittenberger
- */
 #include <string>
 #include <iostream>
 #include "calculator.h"
