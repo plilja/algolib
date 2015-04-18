@@ -1,7 +1,3 @@
-/*
- * Group: Patrik Lilja, Martin Tittenberger
- */
-
 #include "parser.h"
 #include "calculator.h"
 #include <assert.h>

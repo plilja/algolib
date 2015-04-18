@@ -1,7 +1,4 @@
-/*
- * Author: Patrik Lilja
- * Group: Patrik Lilja, Martin Tittenberger
- */
+#pragma once
 
 #include <string>
 
