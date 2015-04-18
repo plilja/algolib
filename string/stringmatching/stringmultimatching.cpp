@@ -1,7 +1,4 @@
 /*
- * Author: Patrik Lilja
- * Date: 07-09-16
- * 
  * An implementations of the Aho-Corasick pattern matching algorithm. 
  * 
  * The total number of characters in all of the patterns that are being 
