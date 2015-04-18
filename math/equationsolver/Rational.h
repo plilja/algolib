@@ -1,7 +1,3 @@
-/*
-	Author: Martin Tittenberger
-	Group: Martin Tittenberger, Patrik Lilja
-*/
 #include <cassert>
 #include <iostream>
 #pragma once

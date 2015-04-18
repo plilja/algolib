@@ -1,12 +1,7 @@
-/*
- * Author: Patrik Lilja
- * Group: Patrik Lilja, Martin Tittenberger
- */
 #ifndef CRT_H_
 #define CRT_H_
 
 #include <iostream>
-//#include <iterator>
 #include <utility>
 #include <list>
 #include "ModArithmetic.h"

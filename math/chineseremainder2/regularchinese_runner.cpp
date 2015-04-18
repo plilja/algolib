@@ -1,8 +1,3 @@
-/*
-	Martin Tittenberger
-	Patrik Lilja
-*/
-
 #include "chineseremainder.h"
 #include <iostream>
 

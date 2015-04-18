@@ -1,9 +1,4 @@
-/*
- * Author: Patrik Lilja
- * Group: Patrik Lilja, Martin Tittenberger
- */
-#ifndef GAUSSJORDAN_H_
-#define GAUSSJORDAN_H_
+#pragma once
 
 #include <vector>
 #include <list>
@@ -284,4 +279,3 @@ int gaussjordanplus(vector<vector<T> > A, vector<T> y, vector<std::pair<bool,T> 
 	return SUCCESS;
 }
 
-#endif /*GAUSSJORDAN_H_*/

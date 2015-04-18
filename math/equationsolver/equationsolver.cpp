@@ -1,7 +1,3 @@
-/*
- * Author: Patrik Lilja
- * Group: Patrik Lilja, Martin Tittenberger
- */
 #include "gaussjordan.h"
 #include <vector>
 #include <iostream>

@@ -1,7 +1,3 @@
-/*
- * Author: Patrik Lilja
- * Group: Patrik Lilja, Martin Tittenberger
- */
 #include "gaussjordan.h"
 #include <vector>
 #include <iostream>
@@ -18,7 +14,6 @@ int main()
 			break;
 		vector<pair<bool, double> > x;
         vector<vector<double> > A(n, vector<double>(n));
-        //fread(A, sizeof(double), n * n, stdin);
 		vector<double> y(n);
         double tmp;
 		for(int i=0; i<n; ++i)

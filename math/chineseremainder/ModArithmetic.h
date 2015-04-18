@@ -1,9 +1,4 @@
-/*
- * Author: Patrik Lilja
- * Group: Patrik Lilja, Martin Tittenberger
- */
-#ifndef MODARITHMETIC_H_
-#define MODARITHMETIC_H_
+#pragma once
 
 #include <utility>
 #include <iostream>
@@ -182,4 +177,3 @@ void ModArithmetic<T>::setValue(T v)
 }
 
 
-#endif /*MODARITHMETIC_H_*/
