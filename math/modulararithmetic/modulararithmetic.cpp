@@ -1,8 +1,3 @@
-/*
-	Martin Tittenberger
-	Patrik Lilja
-*/
-
 #include "modulararithmetic.h"
 #include <iostream>
 

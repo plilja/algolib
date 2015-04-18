@@ -1,8 +1,3 @@
-/*
-	Martin Tittenberger
-	Patrik Lilja
-*/
-
 #pragma once
 
 #include <iostream>
