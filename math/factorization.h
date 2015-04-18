@@ -1,7 +1,7 @@
+#pragma once
+
 #include <vector>
 #include <cmath>
-
-#pragma once
 
 template <typename T>
 std::vector<T> factorization(T x)
