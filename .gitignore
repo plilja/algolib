@@ -26,3 +26,14 @@
 *.exe
 *.out
 *.app
+
+*.eclipse.*
+*.mk
+*~
+*.project
+*.cdt*
+*.swp
+
+bin/
+Debug/
+Contents/
