@@ -1,13 +1,9 @@
 /*
- * Author: Patrik Lilja
- * Date: 07-09-11
- * 
  * This file solves the knapsack problem. 
  * 
  * It runs in time O(capacity*nrOfItems)
  */
-#ifndef KNAPSACK_H_
-#define KNAPSACK_H_
+#pragma once
 
 #include <vector>
 #include <iostream>
@@ -39,4 +35,3 @@ using namespace std;
  */
 unique_ptr<vector<int> > knapsack(int sack_capacity, vector<pair<int,int> > items);
 
-#endif /*KNAPSACK_H_*/
