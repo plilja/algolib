@@ -1,7 +1,3 @@
-/*
- * Author: Patrik Lilja
- * Group: Patrik Lilja, Martin Tittenberger
- */
 #include "crt.h"
 #include <list>
 #include <utility>
