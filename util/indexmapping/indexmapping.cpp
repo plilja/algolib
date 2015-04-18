@@ -1,13 +1,3 @@
-/*
- * Author: Patrik Lilja
- * Date: 07-09-11
- * 
- * Se page:
- * http://kattis.csc.kth.se/problem.php?id=indexmapping
- * 
- * for description of this file, for library functionality look at
- * indexmap.h 
- */
 #include <iostream>
 #include <math.h>
 #include "indexmap.h"
@@ -16,12 +6,6 @@
 
 using namespace std;
 
-/*
- * Se page:
- * http://kattis.csc.kth.se/problem.php?id=indexmapping
- * 
- * for description of the program's main method. 
- */
 int main()
 {
 	string argument;

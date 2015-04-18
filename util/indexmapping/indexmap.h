@@ -1,7 +1,4 @@
 /*
- * Author: Patrik Lilja
- * Date: 07-09-11
- * 
  * The indexmap class is a collection that stores strings
  * and associates integers with those string. 
  * 
@@ -9,8 +6,7 @@
  * 
  * A string can be inserted in time O(log n). 
  */
-#ifndef INDEXMAP_H_
-#define INDEXMAP_H_
+#pragma once
 
 #include <vector>
 #include <string>
@@ -55,4 +51,3 @@ private:
     std::unordered_map<std::string, int> objects; //Maps string->int
 };
 
-#endif /*INDEXMAP_H_*/

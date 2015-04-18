@@ -1,7 +1,3 @@
-/*
- * Author: Patrik Lilja
- * Date: 07-09-11
- */
 #include "indexmap.h"
 #include <unordered_map>
 #include <vector>
