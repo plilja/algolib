@@ -1,0 +1,17 @@
+#!/bin/bash
+diff sample0.out.fac sample0.out.mine
+diff sample1.out.fac sample1.out.mine
+diff sample2.out.fac sample2.out.mine
+diff sample3.out.fac sample3.out.mine
+diff sample4.out.fac sample4.out.mine
+diff sample5.out.fac sample5.out.mine
+diff sample6.out.fac sample6.out.mine
+diff sample7.out.fac sample7.out.mine
+diff sample8.out.fac sample8.out.mine
+diff sample9.out.fac sample9.out.mine
+diff sample10.out.fac sample10.out.mine
+diff sample11.out.fac sample11.out.mine
+diff sample12.out.fac sample12.out.mine
+diff sample13.out.fac sample13.out.mine
+diff sample14.out.fac sample14.out.mine
+diff sample15.out.fac sample15.out.mine
