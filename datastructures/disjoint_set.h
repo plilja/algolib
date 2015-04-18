@@ -1,7 +1,7 @@
+#pragma once
+
 #include <vector>
 #include <unordered_map>
-
-#pragma once
 
 struct DisjointSetNode {
     DisjointSetNode *parent;
