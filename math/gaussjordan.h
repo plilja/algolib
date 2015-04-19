@@ -2,12 +2,12 @@
 
 #include <vector>
 #include <list>
-#include <math.h>
+#include <cmath>
 #include <iostream>
 
 using std::vector;
 
-enum Code {
+enum GaussJordanResult {
     SUCCESS, INCONSISTENT, MULTIPLE, MATRIX_NOT_ZERO
 };
 
@@ -20,7 +20,8 @@ bool isZero(T v)
 template <>
 bool isZero<long double>(long double v)
 {
-	return fabs(v) < 0.00000000001;
+    long double absv = v < 0 ? -v : v;
+	return absv < 0.00000000001;
 }
 
 template <>
@@ -37,7 +38,7 @@ bool isZero<float>(float v)
 
 
 template <typename T>
-Code isZeroSystem(const vector<vector<T> > &A, const vector<T> &y)
+GaussJordanResult isZeroSystem(const vector<vector<T> > &A, const vector<T> &y)
 {
     uint dim=A.size();
     for(uint i=0; i<dim; ++i)
