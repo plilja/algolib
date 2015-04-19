@@ -42,10 +42,10 @@ class Mod
 		static std::pair<T, T> euclid(T a, T b);
 		
 		// Returns the current value
-		T getValue() const;
+		T get_value() const;
 		
 		// Returns the number of possible values
-		T getSize() const;
+		T get_size() const;
 	
 	private:
 	 	T value, size;
@@ -67,35 +67,35 @@ Mod<T>::Mod(T _value, T _size) : value(_value), size(_size)
 template <typename T>
 const Mod<T> Mod<T>::operator + (const Mod<T> &rhs) const
 {
-	if(size != rhs.getSize())
+	if(size != rhs.get_size())
 		assert(!"Can't use operator + with elements using different modulus. ");
 	
-	return Mod<T>(value + rhs.getValue(), size);
+	return Mod<T>(value + rhs.get_value(), size);
 }
 
 template <typename T>
 const Mod<T> Mod<T>::operator - (const Mod<T> &rhs) const
 {
-	if(size != rhs.getSize())
+	if(size != rhs.get_size())
 		assert(!"Can't use operator - with elements using different modulus. ");
 	
-	if (rhs.getValue() > value) {
-		return Mod<T>(value + size - rhs.getValue(), size);
+	if (rhs.get_value() > value) {
+		return Mod<T>(value + size - rhs.get_value(), size);
 	}
 	
 	else {
-		return Mod<T>(value - rhs.getValue(), size);
+		return Mod<T>(value - rhs.get_value(), size);
 	}
 }
 
 template <typename T>
 const Mod<T> Mod<T>::operator * (const Mod<T> &rhs) const
 {
-	if(size != rhs.getSize())
+	if(size != rhs.get_size())
 		assert(!"Can't use operator * with elements using different modulus. ");
 	
 	T x = value;
-	T y = rhs.getValue();
+	T y = rhs.get_value();
 	T aux = 0;
 	
 	while (y != 0) {
@@ -115,12 +115,12 @@ const Mod<T> Mod<T>::operator * (const Mod<T> &rhs) const
 template <typename T>
 const Mod<T> Mod<T>::operator / (const Mod<T> &rhs) const
 {
-	if(size != rhs.getSize())
+	if(size != rhs.get_size())
 		assert(!"Can't use operator / with elements using different modulus. ");
 	
-	std::pair<T, T> p = euclid(size, rhs.getValue());
+	std::pair<T, T> p = euclid(size, rhs.get_value());
 	
-	if (p.first * size + p.second * rhs.getValue() > 1) {
+	if (p.first * size + p.second * rhs.get_value() > 1) {
 		// Multiplicative inverse does not exist
 		Mod<T> aux(-1, size);
 		aux.value = -1;
@@ -138,8 +138,8 @@ Mod<T>& Mod<T>::operator += (const Mod<T> &rhs)
 {
 	Mod<T> aux = *this + rhs;
 	
-	value = aux.getValue();
-	size  = aux.getSize();
+	value = aux.get_value();
+	size  = aux.get_size();
 	
 	return *this;
 }
@@ -149,8 +149,8 @@ Mod<T>& Mod<T>::operator -= (const Mod<T> &rhs)
 {
 	Mod<T> aux = *this - rhs;
 	
-	value = aux.getValue();
-	size  = aux.getSize();
+	value = aux.get_value();
+	size  = aux.get_size();
 	
 	return *this;
 }
@@ -160,8 +160,8 @@ Mod<T>& Mod<T>::operator *= (const Mod<T> &rhs)
 {
 	Mod<T> aux = *this * rhs;
 	
-	value = aux.getValue();
-	size  = aux.getSize();
+	value = aux.get_value();
+	size  = aux.get_size();
 	
 	return *this;
 }
@@ -171,8 +171,8 @@ Mod<T>& Mod<T>::operator /= (const Mod<T> &rhs)
 {
 	Mod<T> aux = *this / rhs;
 	
-	value = aux.getValue();
-	size  = aux.getSize();
+	value = aux.get_value();
+	size  = aux.get_size();
 	
 	return *this;
 }
@@ -180,9 +180,9 @@ Mod<T>& Mod<T>::operator /= (const Mod<T> &rhs)
 template <typename T>
 bool Mod<T>::operator == (const Mod<T> &rhs) const
 {
-	if(size != rhs.getSize())
+	if(size != rhs.get_size())
 		assert(!"Can't compare elements using different modulus. ");
-	return (value == rhs.getValue());
+	return (value == rhs.get_value());
 }
 
 template <typename T>
@@ -192,13 +192,13 @@ bool Mod<T>::operator != (const Mod<T> &rhs) const
 }
 
 template <typename T>
-T Mod<T>::getValue() const
+T Mod<T>::get_value() const
 {
 	return value;
 }
 
 template <typename T>
-T Mod<T>::getSize() const
+T Mod<T>::get_size() const
 {
 	return size;
 }

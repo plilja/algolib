@@ -1,4 +1,4 @@
-#include "modulararithmetic.h"
+#include "../modulararithmetic.h"
 #include <iostream>
 
 using namespace std;
@@ -21,27 +21,23 @@ int main()
 			
 			switch (op) {
 				case '+':
-					//c = a + b;
 					a += b;
 					break;
 				
 				case '-':
-					//c = a - b;
 					a -= b;
 					break;
 				
 				case '*':
-					//c = a * b;
 					a *= b;
 					break;
 				
 				case '/':
-					//c = a / b;
 					a /= b;
 					break;
 			}
 			
-			printf("%lld\n", a.getValue());
+			printf("%lld\n", a.get_value());
 		}
 	}
 }
