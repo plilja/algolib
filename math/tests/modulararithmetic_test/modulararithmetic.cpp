@@ -1,4 +1,4 @@
-#include "../modulararithmetic.h"
+#include "../../modulararithmetic.h"
 #include <iostream>
 
 using namespace std;

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../gcd.h"
+#include "../../gcd.h"
 
 using namespace std;
 

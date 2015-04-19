@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
-#include "../factorization.h"
+#include "../../factorization.h"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
-#include "../gaussjordan.h"
+#include "../../gaussjordan.h"
 #include <vector>
-#include <cstdio>
+#include <iostream>
 
 using namespace std;
 
@@ -11,7 +11,7 @@ int main()
         scanf("%d", &n);
         if (n == 0)
             break;
-        vector<double> x;
+        vector<pair<bool, double> > x;
         vector<vector<double> > A(n, vector<double>(n));
         vector<double> y(n);
         double tmp;
@@ -25,17 +25,24 @@ int main()
             scanf("%lf", &tmp);
             y[i] = tmp;
         }
-        auto ans = gaussjordan<double>(A, y, x);
+        auto ans = gaussjordanplus<double>(A, y, x);
         if (ans == INCONSISTENT) {
             printf("inconsistent\n");
-        } else if (ans == MULTIPLE) {
-            printf("multiple\n");
-        } else if (ans == SUCCESS) {
+        } else if (ans == MULTIPLE || ans == SUCCESS) {
             for (int i = 0; i < n; ++i) {
-                printf("%.4lf ", x[i]);
+                if (x[i].first) {
+                    if (is_zero(x[i].second)) {
+                        printf("0.0000");
+                    } else {
+                        printf("%.4lf ", x[i].second);
+                    }
+                } else {
+                    printf("? ");
+                }
             }
             puts("");
         }
+
     }
     return 0;
 }
