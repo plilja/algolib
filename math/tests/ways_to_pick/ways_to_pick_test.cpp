@@ -1,6 +1,6 @@
 #include <memory>
 #include <vector>
-#include "combinatorics.h"
+#include "../../combinatorics.h"
 #include <string>
 #include <algorithm>
 #include <iostream>
@@ -30,9 +30,9 @@ int main() {
 		scanf("%d", &num);
 		symbols.push_back(num);
 	}
-	unique_ptr<set<vector<int>>> result = ways_to_pick(symbols, num_to_pick);
+	set<vector<int>> result = ways_to_pick(symbols, num_to_pick);
 	vector<string> result_as_strings;
-	for (auto pick : *result) {
+	for (auto pick : result) {
 		result_as_strings.push_back(vec_to_string(pick));
 	}
 	sort(result_as_strings.begin(), result_as_strings.end());

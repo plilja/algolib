@@ -1,10 +1,6 @@
-#include <memory>
 #include <vector>
 #include <set>
 #include "combinatorics.h"
-#include <iostream>
-
-using namespace std;
 
 struct cmp
 {
@@ -14,7 +10,7 @@ struct cmp
     }
 };
 
-unique_ptr<vector<vector<int>>> all_ways_to_pick(const vector<int> &symbols, int num_to_pick, int begin_idx)
+vector<vector<int>> all_ways_to_pick(const vector<int> &symbols, int num_to_pick, int begin_idx)
 {
     if (num_to_pick == 0) {
         vector<vector<int>> *result = new vector<vector<int>>();
@@ -40,7 +36,7 @@ unique_ptr<vector<vector<int>>> all_ways_to_pick(const vector<int> &symbols, int
 	vector<vector<int>> *result = new vector<vector<int>>();
     result->insert(result->end(), solutions_excluding_first->begin(), solutions_excluding_first->end());
     result->insert(result->end(), solutions_including_first->begin(), solutions_including_first->end());
-    return unique_ptr<vector<vector<int>>>(result);
+    return vector<vector<in>>>(result);
 }
 
 unique_ptr<set<vector<int>>> unique_picks(const vector<vector<int>> &picks)
