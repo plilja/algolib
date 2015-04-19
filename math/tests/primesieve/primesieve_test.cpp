@@ -1,5 +1,5 @@
 #include <iostream>
-#include "PrimeSieve.h"
+#include "primesieve.h"
 
 int main()
 {
@@ -7,10 +7,10 @@ int main()
 	scanf("%d %d", &n, &queries);
 	
 	PrimeSieve ps(n);
-	printf("%u\n", ps.primes_in_sieve());
+	printf("%u\n", ps.num_primes());
 	for (int i = 0; i < queries; ++i) {
 		int query;
 		scanf("%d", &query);
-		printf("%d\n", ps.isPrime(query));
+		printf("%d\n", ps.is_prime(query));
 	}
 }

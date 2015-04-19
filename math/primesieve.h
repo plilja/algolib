@@ -1,18 +1,19 @@
-/*
-	Provides a data structure holding iformation about
-	which numbers are prime and which aren't below a given 
-	limit. 
-*/
-
 #pragma once
+
+#include <vector>
 
 typedef unsigned int uint;
 
+/*
+	Provides a data structure holding information about
+	which numbers are prime and which aren't below a given 
+	limit. 
+*/
 class PrimeSieve
 {
 	private:
-		int *primes;
-		uint nrOfPrimes;
+        std::vector<bool> primes;
+		int nr_of_primes;
 		uint sieve_size;
 	public:
 		/*
@@ -25,19 +26,14 @@ class PrimeSieve
 		PrimeSieve(uint n);
 		
 		/*
-		 * Destructor.
-		 */
-		~PrimeSieve();
-		
-		/*
 		 * The number of primes in the sieve. 
 		 */
-		int primes_in_sieve();
+		int num_primes();
 		
 		/*
 		 * Tells if n is a prime number.
 		 * 
 		 * Running time O(1) 
 		 */
-		bool isPrime(uint n) const;
+		bool is_prime(uint n) const;
 };
