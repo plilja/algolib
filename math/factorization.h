@@ -2,10 +2,20 @@
 
 #include <vector>
 #include <cmath>
+#include <cassert>
 
+/**
+ * Finds the prime factors of a positive number greater than 1. 
+ *
+ * If one factor exists multiple times in the factorization it will 
+ * exists multiple times in the result.
+ *
+ * The factors will be returned in increasing order.
+ */
 template <typename T>
 std::vector<T> factorization(T x)
 {
+    assert(x > 1);
     std::vector<T> ans;
     while (x % 2 == 0) {
         ans.push_back(2);
@@ -23,8 +33,9 @@ std::vector<T> factorization(T x)
             upper_lim = sqrt(x);
 
     }
-    if (x > 1) 
+    if (x > 1) {
         ans.push_back(x);
+    }
     
     return ans;
 }
