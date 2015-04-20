@@ -1,115 +1,96 @@
 #include "bellmanford.h"
-#include <cstdio>
-#include <iostream>
 #include <vector>
-#include <cassert>
 #include <limits>
-#include <queue>
-#include <functional>
+#include <algorithm>
 
-Bellmanford::Bellmanford(int nrOfNodes, std::vector<std::pair<std::pair<int, int>, double> > &_edges, int source)
+using std::vector;
+using std::pair;
+
+typedef pair<pair<int, int>, double> Edge;
+
+const double INF = std::numeric_limits<double>::infinity();
+const double NINF = -INF;
+
+BellmanFord::BellmanFord(int _nr_of_nodes, vector<Edge> &_edges, int _source) :
+    source(_source),
+    nr_of_nodes(_nr_of_nodes),
+    edges(_edges),
+    dist(nr_of_nodes, INF),
+    parent(nr_of_nodes, -1)
 {
-	this->nrOfNodes=nrOfNodes;
-	parent=new int[nrOfNodes];
-	nrOfEdges=_edges.size();
-	edges=new Edge[nrOfEdges];
-	this->source=source;
-	dist=new double[nrOfNodes];
-	initializeEdges(_edges);
-	for(int i=0; i<nrOfNodes; i++)
-	{
-		dist[i]=std::numeric_limits<int>::max();		
-	}
-	for(int i=0; i<nrOfNodes; i++)
-	{
-		parent[i]=-1; 
-	}
-	construct();
+    construct();
 }
 
-double Bellmanford::distance(int goal)
+double BellmanFord::distance(int goal)
 {
-	return dist[goal];
+    return dist[goal];
 }
 
-void Bellmanford::getPath(std::list<int> &path, int goal)
+vector<int> BellmanFord::get_path(int goal)
 {
-	path.clear();
-	if(dist[goal]==std::numeric_limits<int>::max() || dist[goal]==std::numeric_limits<int>::min()) 
-	{
-		//impossible case 
-		return;
-	}
-	int current=goal;
-	while(current!=source)
-	{
-		path.push_front(current);
-		current=parent[current];
-	}
-	path.push_front(source);
+    vector<int> path;
+    if (dist[goal] == INF || dist[goal] == NINF) {
+        //no path exists
+        return path;
+    }
+    int current = goal;
+    while (current != source) {
+        path.push_back(current);
+        current = parent[current];
+    }
+    path.push_back(source);
+    std::reverse(path.begin(), path.end());
+    return path;
 }
 
-Bellmanford::~Bellmanford()
+
+inline int from(Edge &e)
 {
-	delete[] dist;
-	delete[] edges;
-	delete[] parent;
+    return e.first.first;
 }
 
-void Bellmanford::construct()
+inline int to(Edge &e)
 {
-	dist[source]=0.0;
-
-	Edge uv;
-	for(int i=0; i<nrOfNodes-1; i++)
-	{
-		for(int j=0; j<nrOfEdges; j++)
-		{
-			uv=edges[j];
-			if(dist[uv.source]==std::numeric_limits<int>::max())
-			{
-				continue; //addition would cause integer overflow
-			}
-			if(dist[uv.dest]>dist[uv.source]+uv.weight)
-			{
-				dist[uv.dest]=dist[uv.source]+uv.weight;
-				parent[uv.dest]=uv.source;
-			}
-		}
-	}
-	
-	//Check for negative cycles
-	for(int i=0; i<nrOfNodes-1; i++)
-	{
-		for(int j=0; j<nrOfEdges; j++)
-		{
-			uv=edges[j];
-			if(dist[uv.source]==std::numeric_limits<int>::max())
-			{
-				continue; //addition would cause integer overflow
-			}
-			if(dist[uv.source]==std::numeric_limits<int>::min())
-			{
-				dist[uv.dest]=std::numeric_limits<int>::min();
-				continue;
-			}
-			if(dist[uv.dest]>dist[uv.source]+uv.weight)
-			{
-				dist[uv.dest]=std::numeric_limits<int>::min();
-			}
-		}
-	}	
+    return e.first.second;
 }
 
-void Bellmanford::initializeEdges(std::vector<std::pair<std::pair<int, int>, double> > &_edges)
+inline double weight(Edge &e)
 {
-	int i=0;
-	for(std::vector<std::pair<std::pair<int, int>, double> >::iterator it=_edges.begin(); it!=_edges.end(); it++)
-	{
-		edges[i].source=it->first.first;
-		edges[i].dest=it->first.second;
-		edges[i].weight=it->second;
-		i++;
-	}
+    return e.second;
+}
+
+void BellmanFord::construct()
+{
+    dist[source] = 0.0;
+
+    for (int i = 0; i < nr_of_nodes - 1; i++) {
+        for (int j = 0; j < (int)edges.size(); j++) {
+            auto uv = edges[j];
+            if (dist[from(uv)] == INF) {
+                continue;
+            }
+            if (dist[to(uv)] > dist[from(uv)] + weight(uv)) {
+                dist[to(uv)] = dist[from(uv)] + weight(uv);
+                parent[to(uv)] = from(uv);
+            }
+        }
+    }
+
+    //Check for negative cycles
+    for (int i = 0; i < nr_of_nodes - 1; i++) {
+        for (int j = 0; j < (int)edges.size(); j++) {
+            auto uv = edges[j];
+            if (dist[from(uv)] == INF) {
+                continue;
+            }
+            if (dist[from(uv)] == NINF) {
+                dist[to(uv)] = NINF;
+                continue;
+            }
+            if (dist[to(uv)] > dist[from(uv)] + weight(uv)) {
+                dist[to(uv)] = NINF;
+            }
+        }
+    }
 }
 
