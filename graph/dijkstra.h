@@ -1,23 +1,13 @@
 /*
- * Author: Patrik Lilja
- * Date: 07-09-30
- * 
  * A class that holds the representation of a graph and is able to answer questions 
  * about the minimum distance between a predetermined source and some goal node and
  * also produce a path of that minimum distance. 
  * 
  * To do this it uses Dijkstras algorithm. 
  */
-#ifndef DIJKSTRA_H_
-#define DIJKSTRA_H_
+#pragma once
 
 #include <vector>
-#include <list>
-
-struct node
-{
-	std::list<std::pair<int, double> > edges; //pair.first=where to, pair.second=edge cost
-};
 
 class Dijkstra
 {
@@ -36,9 +26,7 @@ public:
 	 * 			range 0<= index <=nrOfNodes-1 
 	 * source: The index of the source nodes. 
 	 */
-	Dijkstra(std::size_t nrOfNodes, std::vector<std::pair<std::pair<int, int>, double> > &_nodes, int source);
-	
-	virtual ~Dijkstra();
+	Dijkstra(std::size_t nr_of_nodes, const std::vector<std::pair<std::pair<int, int>, double> > &_nodes, int source);
 	
 	/*
 	 * Get a path, if it exists, between the source and some node. 
@@ -53,7 +41,7 @@ public:
 	 * a path between the nodes doesn't exist the list will be empty. If The goal node
 	 * is the same as the source node, the list will simply contain this node. 
 	 */
-	std::list<int> getPath(int goal);
+	std::vector<int> get_path(int goal);
 	
 	/*
 	 * Get the best distance between the source and a goal node.
@@ -71,13 +59,10 @@ private:
 
 	void construct();
 
-	void initializeNodes(std::size_t nrOfNodes, std::vector<std::pair<std::pair<int, int>, double> > &from);	
-
-	double *dist;
+    std::vector<double> dist;
 	int source;
-	int nrOfNodes;
-	node *nodes;
-	int *parent;
+	int nr_of_nodes;
+    std::vector<std::vector<std::pair<int, double>>> adj_list;
+    std::vector<int> parent;
 };
 
-#endif /*DIJKSTRA_H_*/
