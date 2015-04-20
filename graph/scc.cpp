@@ -1,13 +1,11 @@
-#include <vector>
 #include "scc.h"
-#include <memory>
+#include <vector>
 #include <set>
-#include <unordered_set>
-#include <stack>
 #include <deque>
-#include <iostream>
 
-using namespace std;
+using std::vector;
+using std::deque;
+using std::set;
 
 void dfs(int starting_point, deque<int> &visited_order_stack, vector<bool> &visited, const vector<vector<int>> &graph)
 {
@@ -30,7 +28,7 @@ void build_reverse_graph(const vector<vector<int>> &graph, vector<vector<int>> &
     }
 }
 
-unique_ptr<vector<set<int>>> scc(const vector<vector<int>> &graph)
+vector<set<int>> scc(const vector<vector<int>> &graph)
 {
 
     deque<int> s;
@@ -44,7 +42,7 @@ unique_ptr<vector<set<int>>> scc(const vector<vector<int>> &graph)
     vector<vector<int>> reverse_graph(graph.size(), vector<int>());
     build_reverse_graph(graph, reverse_graph);
     visited = vector<bool>(graph.size(), false);
-    unique_ptr<vector<set<int>>> result = unique_ptr<vector<set<int>>>(new vector<set<int>>());
+    vector<set<int>> result;
     while (!s.empty()) {
         int next_to_visit = s.front();
         s.pop_front();
@@ -56,7 +54,7 @@ unique_ptr<vector<set<int>>> scc(const vector<vector<int>> &graph)
         dfs(next_to_visit, visited_from, visited, reverse_graph);
 
         set<int> component(visited_from.begin(), visited_from.end());
-        result->push_back(component);
+        result.push_back(component);
     }
 
     return result;

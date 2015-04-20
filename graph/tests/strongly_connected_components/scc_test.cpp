@@ -1,9 +1,7 @@
+#include "../../scc.h"
 #include <cstdio>
-#include <iostream>
 #include <vector>
-#include "scc.h"
-#include <string>
-#include <algorithm>
+#include <set>
 
 using namespace std;
 
@@ -19,9 +17,9 @@ int main()
         graph[from].push_back(to);
     }
 
-    unique_ptr<vector<set<int>>> components = scc(graph);
+    vector<set<int>> components = scc(graph);
 
-    for (auto & c : *components) {
+    for (auto & c : components) {
         for (auto & v : c) {
             printf("%d ", v);
         }
