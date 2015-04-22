@@ -11,12 +11,12 @@ typedef pair<pair<int, int>, double> Edge;
 const double INF = std::numeric_limits<double>::infinity();
 const double NINF = -INF;
 
-BellmanFord::BellmanFord(int _nr_of_nodes, vector<Edge> &_edges, int _source) :
-    source(_source),
-    nr_of_nodes(_nr_of_nodes),
-    edges(_edges),
-    dist(nr_of_nodes, INF),
-    parent(nr_of_nodes, -1)
+BellmanFord::BellmanFord(int _nr_of_nodes, vector <Edge> &_edges, int _source) :
+        source(_source),
+        nr_of_nodes(_nr_of_nodes),
+        edges(_edges),
+        dist(nr_of_nodes, INF),
+        parent(nr_of_nodes, -1)
 {
     construct();
 }
@@ -64,7 +64,7 @@ void BellmanFord::construct()
     dist[source] = 0.0;
 
     for (int i = 0; i < nr_of_nodes - 1; i++) {
-        for (int j = 0; j < (int)edges.size(); j++) {
+        for (int j = 0; j < (int) edges.size(); j++) {
             auto uv = edges[j];
             if (dist[from(uv)] == INF) {
                 continue;
@@ -78,7 +78,7 @@ void BellmanFord::construct()
 
     //Check for negative cycles
     for (int i = 0; i < nr_of_nodes - 1; i++) {
-        for (int j = 0; j < (int)edges.size(); j++) {
+        for (int j = 0; j < (int) edges.size(); j++) {
             auto uv = edges[j];
             if (dist[from(uv)] == INF) {
                 continue;

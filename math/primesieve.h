@@ -11,29 +11,29 @@ typedef unsigned int uint;
 */
 class PrimeSieve
 {
-    private:
-        std::vector<bool> primes;
-        int nr_of_primes;
-        uint sieve_size;
-    public:
-        /*
-         * Construct a prime sieve of size n using
-         * the sieve of eratosthenes algorithm. 
-         * 
-         * Parameters:
-         * n : The size of the sieve (inclusive)
-         */
-        PrimeSieve(uint n);
-        
-        /*
-         * The number of primes in the sieve. 
-         */
-        int num_primes();
-        
-        /*
-         * Tells if n is a prime number.
-         * 
-         * Running time O(1) 
-         */
-        bool is_prime(uint n) const;
+private:
+    std::vector<bool> primes;
+    int nr_of_primes;
+    uint sieve_size;
+public:
+    /*
+     * Construct a prime sieve of size n using
+     * the sieve of eratosthenes algorithm.
+     *
+     * Parameters:
+     * n : The size of the sieve (inclusive)
+     */
+    PrimeSieve(uint n);
+
+    /*
+     * The number of primes in the sieve.
+     */
+    int num_primes();
+
+    /*
+     * Tells if n is a prime number.
+     *
+     * Running time O(1)
+     */
+    bool is_prime(uint n) const;
 };

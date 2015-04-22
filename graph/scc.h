@@ -6,4 +6,4 @@
  *
  * Running time: O(num nodes + num edges)
  */
-std::vector<std::set<int>> scc(const std::vector<std::vector<int>> &graph);
+std::vector<std::set<int>> scc(const std::vector <std::vector<int>> &graph);
