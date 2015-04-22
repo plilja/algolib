@@ -37,5 +37,6 @@
 bin/
 Debug/
 Contents/
+.idea
 
 *.bak
