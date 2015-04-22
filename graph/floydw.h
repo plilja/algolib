@@ -1,21 +1,13 @@
 /*
- * Author: Patrik Lilja
- * Date: 07-10-04
- *
  * Find all minimum distances between nodes in a directed graph. This
  * is done using the Floyd-Warshall algorithm.
- *
- * The template argument (int N) tells how many nodes there are in the graph
- *
- * The initialization is done in time O(|V|^3). Lookup is done in O(1).
  */
-#ifndef FLOYD_H_
-#define FLOYD_H_
-#include <iostream>
+#pragma once
+
 #include <math.h>
 #include <vector>
 
-class Floyd {
+class Floydw {
 public:
     /*
      * The constructor will perform the actual algorithm and therefore runs
@@ -27,9 +19,7 @@ public:
      * 			edge between i and j. If no edge exists between i and j, wt[i][j] must equal
      * 			std::numeric_limits<int>::max().
      */
-    Floyd(int N, std::vector<std::vector<double>> wt);
-
-    virtual ~Floyd();
+    Floydw(std::vector <std::vector<double>> wt, int n);
 
     /*
      * Get the minimum distance between two nodes.
@@ -46,13 +36,8 @@ public:
      */
     double distance(int s, int d);
 
-    /*
-     * Print the distance matrix for debugging purposes.
-     */
-    void printAll();
 private:
-    double **path;
-    int N;
+    std::vector <std::vector<double>> dist;
+    int n;
 };
 
-#endif /*FLOYD_H_*/

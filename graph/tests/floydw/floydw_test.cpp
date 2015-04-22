@@ -1,30 +1,16 @@
-/*
- * Author: Patrik Lilja
- * Date: 07-10-04
- *
- * Se page:
- * http://kattis.csc.kth.se/problem?id=allpairspath
- * for a problem description.
- */
 #include <iostream>
 #include <math.h>
 #include <string>
-#include "Floyd.h"
+#include "../../floydw.h"
 #include <vector>
 #include <limits>
 
 using namespace std;
 
-/*
- * Se page:
- * http://kattis.csc.kth.se/problem?id=allpairspath
- * for a problem description.
- */
-int main()
-{
+int main() {
     const int INF = std::numeric_limits<int>::max();
     const int NEG_INF = std::numeric_limits<int>::min();
-    vector<vector<double>> wt(150, vector<double>(150));
+    vector <vector<double>> wt(150, vector<double>(150));
     int nrOfNodes, nrOfEdges, goal, cost;
     int a, b, queries, source;
     int ans;
@@ -42,10 +28,10 @@ int main()
             scanf("%d %d %d", &a, &b, &cost);
             wt[a][b] = std::min(wt[a][b], (double) cost); //only save the cheapest edge
         }
-        Floyd fd(150, wt);
+        Floydw fd(wt, 150);
         for (int i = 0; i < queries; i++) {
             scanf("%d %d", &source, &goal);
-            ans = (int)fd.distance(source, goal);
+            ans = (int) fd.distance(source, goal);
             if (ans == INF) {
                 printf("Impossible\n");
             } else if (ans == NEG_INF) {
@@ -55,7 +41,6 @@ int main()
                 printf("%d\n", ans);
             }
         }
-        //fd.printAll();
         printf("\n");
     }
     return 0;
