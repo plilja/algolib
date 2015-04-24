@@ -6,11 +6,6 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
-#include <memory>
-
-
-using namespace std;
 
 /*
  * Solve the knapsack problem for a reasonable size of the sack and a
