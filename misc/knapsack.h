@@ -9,9 +9,6 @@
 #include <iostream>
 #include <memory>
 
-#define NEG_INF -2147483648
-#define D_NEG_INF -2147483648.0
-#define INF 2147483647
 
 using namespace std;
 
@@ -20,10 +17,9 @@ using namespace std;
  * reasonable number of items.
  * 
  * Parameters:
- * sackCapacity - The capacity of the sack
- * nrOfItems - The number of items to choose from
  * items - list of items, the first value of each pair describes the value and the second describes it's weight
- * 
+ * sackCapacity - The capacity of the sack
+ *
  * Returns:
  * An vector with the indexes chosen in a solution to the problem, 
  * the indexes start with 0 for the first item. 
@@ -33,5 +29,5 @@ using namespace std;
  * Se: http://en.wikipedia.org/wiki/Knapsack_problem
  * for description of the algorithm.  
  */
-unique_ptr<vector<int> > knapsack(int sack_capacity, vector<pair<int,int> > items);
+std::vector<int> knapsack(std::vector<std::pair<int,int>> items, int sack_capacity);
 
