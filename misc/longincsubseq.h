@@ -2,10 +2,6 @@
 
 #include <vector>
 
-#define NEG_INF -2147483648
-#define D_NEG_INF -2147483648.0
-#define INF 2147483647
-
 /*
  * Solves the longest incresing subsequence problem.
  * 
