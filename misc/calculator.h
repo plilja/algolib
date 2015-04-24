@@ -12,9 +12,9 @@
  * <number> := 12, 5, -56, -9, 0, ...
  * 
  * Also has possibility to evaluate expression that don't 
- * entirely fit the above grammar by applying the reduce function. 
+ * entirely fit the above grammar by applying the reduce function (for example -- => +).
  * 
- * The normal operator precidence applies. Returns the 
+ * The normal operator precedence applies. Returns the
  * result as a double. 
  * 
  * Program will terminate if input is malformatted.    
