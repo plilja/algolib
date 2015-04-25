@@ -1,9 +1,0 @@
-#!/bin/bash
-for ((j=0;j<=1000; j++)); do
-	for ((i=0;i<=15;i+=1)); do
-		./flowgen 7 15 100000 >./sample$i.in 
-		./maxflow <sample$i.in>sample$i.out.fac
-		./maxflowAdk <sample$i.in>sample$i.out.mine 
-		diff sample$i.out.fac sample$i.out.mine
-	done
-done
