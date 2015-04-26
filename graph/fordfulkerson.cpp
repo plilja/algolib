@@ -176,7 +176,7 @@ MinCutEdgesResult min_cut_edges(const std::vector<FlowEdge> &edges, int nr_of_no
     return MinCutEdgesResult({cost, output});
 }
 
-MinCutNodesResult min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
+set<int> min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
 {
     auto flow_network = ford_fulkerson(edges, nr_of_nodes, source, sink);
 
@@ -188,6 +188,5 @@ MinCutNodesResult min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_no
             output.insert(i);
         }
     }
-    int cost = flow_out_of_node(flow_network, source); //mincut=maxflow
-    return MinCutNodesResult({cost, output});;
+    return output;
 }

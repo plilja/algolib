@@ -19,11 +19,6 @@ struct MinCutEdgesResult {
     std::vector<FlowEdge> edges;
 };
 
-struct MinCutNodesResult {
-	int cost;
-    std::set<int> nodes;
-};
-
 /*
  * Solve a flow problem using the Edmonds-Karp version of the Ford-Fulkerson algorithm. 
  * 
@@ -45,6 +40,6 @@ MinCutEdgesResult min_cut_edges(const std::vector<FlowEdge> &edges, int nr_of_no
  * 
  * Runs in time O(|N|*|V|^2)
  */
-MinCutNodesResult min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
+std::set<int> min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
 
 
