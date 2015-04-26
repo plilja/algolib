@@ -5,22 +5,24 @@
 #include <set>
 #include <algorithm>
 #include <set>
+#include <memory>
 
 using std::vector;
 using std::queue;
 using std::set;
+using std::shared_ptr;
 
 struct Edge {
     int from; //index of the from node
     int to; //index of the to node
     int c; //capacity
     int f; //flow
-    Edge *reverse;
+    shared_ptr<Edge> reverse;
 };
 
-vector<Edge *> find_path(vector<vector<Edge *>> &flow_network, int nr_of_nodes, int source, int sink)
+vector<shared_ptr<Edge>> find_path(vector<vector<shared_ptr<Edge>>> &flow_network, int nr_of_nodes, int source, int sink)
 {
-    vector<Edge *> predecessor(nr_of_nodes, NULL);
+    vector<shared_ptr<Edge>> predecessor(nr_of_nodes, NULL);
     vector<bool> visited(nr_of_nodes, false);
 
     queue<int> q;
@@ -39,7 +41,7 @@ vector<Edge *> find_path(vector<vector<Edge *>> &flow_network, int nr_of_nodes, 
         }
     }
 
-    vector<Edge *> path;
+    vector<shared_ptr<Edge>> path;
     if (visited[sink]) {
         int i = sink;
         while (predecessor[i] != NULL) {
@@ -51,7 +53,7 @@ vector<Edge *> find_path(vector<vector<Edge *>> &flow_network, int nr_of_nodes, 
     return path;
 }
 
-int capacity_of_path(const vector<Edge *> &path)
+int capacity_of_path(const vector<shared_ptr<Edge>> &path)
 {
     int c = std::numeric_limits<int>::max();
     for (auto &e : path) {
@@ -60,12 +62,12 @@ int capacity_of_path(const vector<Edge *> &path)
     return c;
 }
 
-vector<vector<Edge *>> initialize_flow_network(const vector<FlowEdge> &edges, int nr_of_nodes)
+vector<vector<shared_ptr<Edge>>> initialize_flow_network(const vector<FlowEdge> &edges, int nr_of_nodes)
 {
-    vector<vector<Edge *>> flow_network(nr_of_nodes, vector<Edge *>());
+    vector<vector<shared_ptr<Edge>>> flow_network(nr_of_nodes, vector<shared_ptr<Edge>>());
     for (auto &flow_edge : edges) {
-        Edge *e = new Edge;
-        Edge *e_rev = new Edge;
+        shared_ptr<Edge> e = std::make_shared<Edge>();
+        shared_ptr<Edge> e_rev = std::make_shared<Edge>();
 
         e->from = flow_edge.from;
         e->to = flow_edge.to;
@@ -92,11 +94,11 @@ vector<vector<Edge *>> initialize_flow_network(const vector<FlowEdge> &edges, in
  * Perform the actual Ford Fulkerson algorithm. Returns the resulting
  * flow network.
  */
-vector<vector<Edge *>> ford_fulkerson(const vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
+vector<vector<shared_ptr<Edge>>> ford_fulkerson(const vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
 {
     auto flow_network = initialize_flow_network(edges, nr_of_nodes);
     while (true) {
-        vector<Edge *> path = find_path(flow_network, nr_of_nodes, source, sink);
+        vector<shared_ptr<Edge>> path = find_path(flow_network, nr_of_nodes, source, sink);
         if (path.size() == 0) {
             break;
         }
@@ -111,7 +113,7 @@ vector<vector<Edge *>> ford_fulkerson(const vector<FlowEdge> &edges, int nr_of_n
     return flow_network;
 }
 
-int flow_out_of_node(const vector<vector<Edge *>> &flow_network, int n)
+int flow_out_of_node(const vector<vector<shared_ptr<Edge>>> &flow_network, int n)
 {
     int flow = 0;
     for (auto e : flow_network[n]) {
@@ -137,7 +139,7 @@ FlowResult max_flow(const vector<FlowEdge> &edges, int nr_of_nodes, int source, 
     return FlowResult({flow, output});
 }
 
-vector<bool> reachable_from_source(const vector<vector<Edge *>> &flow_network, int nr_of_nodes, int source)
+vector<bool> reachable_from_source(const vector<vector<shared_ptr<Edge>>> &flow_network, int nr_of_nodes, int source)
 {
     queue<int> q;
     vector<bool> d(nr_of_nodes, false);
