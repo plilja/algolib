@@ -9,9 +9,6 @@
 		x = a1 mod n1
 		x = a2 mod n2
 	
-	where <a1, n1> and <a2, n2> is the input to the function
-	which returns the solution x mod N.
-	
 	Note: gcd(n1, n2) have to be = 1
 */
 template <typename T>
@@ -45,8 +42,9 @@ std::pair<T, T> crt(const std::pair<T, T> &eq1, const std::pair<T, T> &eq2)
         x = a1 mod n1
         x = a2 mod n2
 
-    where <a1, n1> and <a2, n2> is the input to the function
-    which returns the solution x mod N.
+    gcd(n1, n2) may be greater than 1. 
+
+    If no solution exists {-1, -1} is returned.
 */
 template <typename T>
 std::pair<T, T> crt_general(const std::pair<T, T> &eq1, const std::pair<T, T> &eq2)
