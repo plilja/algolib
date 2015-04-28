@@ -1,5 +1,5 @@
-#include "chineseremainder.h"
-#include <iostream>
+#include "../../crt.h"
+#include <cstdio>
 
 int main()
 {
@@ -12,8 +12,8 @@ int main()
 		
 		scanf("%d %d %d %d", &a, &n1, &b, &n2);
 		
-		Mod<long long> ans = crt<long long>(std::make_pair(a, n1), std::make_pair(b, n2));
+		auto ans = crt<long long>(std::make_pair(a, n1), std::make_pair(b, n2));
 		
-		printf("%llu %llu\n", ans.getValue(), ans.getSize());
+		printf("%llu %llu\n", ans.first, ans.second);
 	}
 }

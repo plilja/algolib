@@ -1,6 +1,6 @@
-#include "generalchineseremainder.h"
+#include "../../crt.h"
+#include "../../modulararithmetic.h"
 #include <iostream>
-#include "modulararithmetic.h"
 
 using namespace std;
 
@@ -14,12 +14,12 @@ int main()
 
         cin >> a >> n1 >> b >> n2;
 
-        Mod<long long> ans = crt_general<long long>({a, n1}, {b, n2});
+        auto ans = crt_general<long long>({a, n1}, {b, n2});
 
-        if (ans.getValue() == 0) {
+        if (ans.second == -1) {
             cout << "no solution" << endl;
         } else {
-            cout << ans.getValue() << " " << ans.getSize() << endl;
+            cout << ans.first << " " << ans.second << endl;
         }
     }
 }
