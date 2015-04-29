@@ -11,29 +11,29 @@
 	
 	Note: gcd(n1, n2) have to be = 1
 */
-template <typename T>
-std::pair<T, T> crt(const std::pair<T, T> &eq1, const std::pair<T, T> &eq2)
+template<typename T>
+std::pair <T, T> crt(const std::pair <T, T> &eq1, const std::pair <T, T> &eq2)
 {
-	T N = eq1.second * eq2.second;
-	
-	// Calculate e1
-	Mod<T> a1(eq1.first, N);
-	Mod<T> M1(N / eq1.second, N);
-	
-	std::pair<T, T> rs = Mod<T>::euclid(eq1.second, M1.getValue());
-	
-	Mod<T> e1(rs.second, N);
-	
-	// Calculate e2
-	Mod<T> a2(eq2.first, N);
-	Mod<T> M2(N / eq2.second, N);
-	
-	rs = Mod<T>::euclid(eq2.second, M2.getValue());
-	
-	Mod<T> e2(rs.second, N);
-	
-	// Calculate and return result
-	auto res = (a1 * e1 * M1 + a2 * e2 * M2);
+    T N = eq1.second * eq2.second;
+
+    // Calculate e1
+    Mod<T> a1(eq1.first, N);
+    Mod<T> M1(N / eq1.second, N);
+
+    std::pair <T, T> rs = Mod<T>::euclid(eq1.second, M1.getValue());
+
+    Mod<T> e1(rs.second, N);
+
+    // Calculate e2
+    Mod<T> a2(eq2.first, N);
+    Mod<T> M2(N / eq2.second, N);
+
+    rs = Mod<T>::euclid(eq2.second, M2.getValue());
+
+    Mod<T> e2(rs.second, N);
+
+    // Calculate and return result
+    auto res = (a1 * e1 * M1 + a2 * e2 * M2);
     return {res.getValue(), res.getSize()};
 }
 
@@ -46,8 +46,8 @@ std::pair<T, T> crt(const std::pair<T, T> &eq1, const std::pair<T, T> &eq2)
 
     If no solution exists {-1, -1} is returned.
 */
-template <typename T>
-std::pair<T, T> crt_general(const std::pair<T, T> &eq1, const std::pair<T, T> &eq2)
+template<typename T>
+std::pair <T, T> crt_general(const std::pair <T, T> &eq1, const std::pair <T, T> &eq2)
 {
     T common = gcd(eq1.second, eq2.second);
 
@@ -56,7 +56,7 @@ std::pair<T, T> crt_general(const std::pair<T, T> &eq1, const std::pair<T, T> &e
 
     // A solution exists iff a1 == a2 mod gcd(n1, n2)
     if (a1_mod != a2_mod) {
-        return { -1, -1};
+        return {-1, -1};
     } else if (common == std::min(eq1.second, eq2.second)) {
         return {std::max(eq1.first, eq2.first), std::max(eq1.second, eq2.second)};
     }
