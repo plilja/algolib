@@ -1,15 +1,8 @@
-#ifndef STRINGMULTIMATCHING_H_
-#define STRINGMULTIMATCHING_H_
+#pragma once
 
-#include "TrieNode.h"
 #include <vector>
 
 #include <string>
-
-using namespace std;
-
-typedef unsigned char uchar;
-
 
 /*
  * An implementations of the Aho-Corasick pattern matching algorithm. 
@@ -33,7 +26,6 @@ typedef unsigned char uchar;
  * "Efficient string matching: An aid to bibliographic search"
  * 
  */
-vector< vector<int> > ahocorasick(string text, vector<string> patterns);
+std::vector<std::vector<int> > ahocorasick(const std::string &text, const std::vector<std::string> &patterns);
 
 
-#endif /*STRINGMULTIMATCHING_H_*/
