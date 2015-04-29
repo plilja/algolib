@@ -37,7 +37,7 @@ int main()
 					break;
 			}
 			
-			printf("%lld\n", a.get_value());
+			printf("%lld\n", a.getValue());
 		}
 	}
 }
