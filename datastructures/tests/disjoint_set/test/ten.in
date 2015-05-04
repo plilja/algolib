@@ -1,0 +1,23 @@
+10 22
+count
+merge 1 5
+same 1 2
+same 2 5
+merge 2 5
+same 1 2
+same 9 1
+merge 9 5
+same 9 1
+merge 6 7
+same 2 7
+merge 7 5
+count
+merge 3 4
+merge 3 8
+count
+merge 4 5
+count
+same 8 1
+merge 0 9
+count
+same 0 4

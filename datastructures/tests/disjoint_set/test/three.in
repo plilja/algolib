@@ -1,0 +1,15 @@
+3 14
+count
+same 0 1
+same 1 2
+same 0 2
+merge 0 1
+count
+same 0 1
+same 0 2
+same 1 2
+merge 2 1
+same 0 2
+same 0 1
+same 1 2
+count
