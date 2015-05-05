@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <unordered_map>
 
 struct DisjointSetNode {
     DisjointSetNode *parent;
@@ -27,4 +26,9 @@ public:
      * Returns the number of sets.
      */
     int count();
+
+    /**
+     * Tells if two numbers belong to the same set.
+     */
+    bool same(int x, int b);
 };

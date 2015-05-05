@@ -1,0 +1,18 @@
+2 17
+count
+same 0 0
+same 1 0
+same 0 1
+same 1 1
+merge 0 1
+count
+same 0 0
+same 1 0
+same 0 1
+same 1 1
+merge 0 1
+count
+merge 1 1
+count 
+merge 0 0
+count
