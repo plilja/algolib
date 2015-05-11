@@ -1,5 +1,5 @@
 #include <iostream>
-#include "primesieve.h"
+#include "../../primesieve.h"
 
 int main()
 {

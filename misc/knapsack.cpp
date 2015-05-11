@@ -18,7 +18,7 @@ vector<int> knapsack(vector<pair<int, int>> items, int sack_capacity)
         maxv[0][j] = 0;
 
     }
-    for (uint i = 1; i <= items.size(); ++i) {
+    for (int i = 1; i <= (int)items.size(); ++i) {
         auto item = items[i - 1];
         int value = item.first;
         int weight = item.second;
@@ -27,7 +27,7 @@ vector<int> knapsack(vector<pair<int, int>> items, int sack_capacity)
             maxv[i][j] = maxv[i - 1][j];
         }
         for (int j = weight; j <= sack_capacity; ++j) {
-            maxv[i][j] = max(maxv[i - 1][j], maxv[i - 1][j - weight] + value);
+            maxv[i][j] = std::max(maxv[i - 1][j], maxv[i - 1][j - weight] + value);
         }
     }
 
