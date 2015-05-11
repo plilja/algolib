@@ -7,11 +7,32 @@ struct FlowEdge {
 	int from;
 	int to;
 	int capacity;
+
+    int getCost() const {
+        return 0;
+    }
+};
+
+struct CostFlowEdge {
+	int from;
+	int to;
+	int capacity;
+    int cost;
+
+    int getCost() const {
+        return cost;
+    }
 };
 
 struct FlowResult {
 	int flow;
     std::vector<FlowEdge> edges;
+};
+
+struct MinCostMaxFlowResult {
+    int flow;
+    int cost;
+    std::vector<CostFlowEdge> edges;
 };
 
 struct MinCutEdgesResult {
@@ -25,6 +46,16 @@ struct MinCutEdgesResult {
  * Runs in time O(|N|*|V|^2)
  */
 FlowResult max_flow(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
+
+
+/**
+ * Finds the maximum flow between the source and the sink, using the cheapest possible edges to achieve this.
+ *
+ * Note that the total cost of the edges may not exceed 1000000, if they do, the solution is not guarenteed
+ * to be correct.
+ */
+MinCostMaxFlowResult min_cost_max_flow(const std::vector<CostFlowEdge> &edges, int nr_of_nodes, int source, int sink);
+
 
 /*
  * Find a minimal subset of edges that separates the source from the sink. The subset will be minimal
@@ -41,5 +72,6 @@ MinCutEdgesResult min_cut_edges(const std::vector<FlowEdge> &edges, int nr_of_no
  * Runs in time O(|N|*|V|^2)
  */
 std::set<int> min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
+
 
 
