@@ -46,7 +46,7 @@ namespace
 }
 
 /**
- * Returns all possible ways to pick the speciefied number of objects
+ * Returns all possible ways to pick the specified number of objects
  * from the symbols provided.
  */
 template<typename T>
