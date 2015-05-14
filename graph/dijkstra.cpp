@@ -7,12 +7,12 @@ using std::vector;
 using std::priority_queue;
 using std::pair;
 
-Dijkstra::Dijkstra(size_t n, const vector <pair<pair<int, int>, double>> &_nodes, int s) : source(s), nr_of_nodes(n)
+Dijkstra::Dijkstra(size_t n, const vector <pair<pair<int, int>, double>> &edges, int s) : source(s), nr_of_nodes(n)
 {
     parent = vector<int>(n, -1);
     dist = vector<double>(n, -1);
     adj_list = vector < vector < pair<int, double>>>(n);
-    for (auto p : _nodes) {
+    for (auto p : edges) {
         adj_list[p.first.first].push_back({p.first.second, p.second});
     }
     construct();
