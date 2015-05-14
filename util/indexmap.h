@@ -1,23 +1,19 @@
 /*
  * The indexmap class is a collection that stores objects
  * and associates integers with those objects. 
- * 
- * Given an integer an object can be retrived in constant time.
- * 
- * An object can be inserted in time O(1). 
  */
 #pragma once
 
 #include <vector>
 #include <string>
-#include <unordered_map>
+#include <map>
 
 template<typename T>
 class indexmap
 {
 private:
     std::vector <T> ind; //Maps int->T
-    std::unordered_map<T, int> objects; //Maps T->int
+    std::map<T, int> objects; //Maps T->int
 public:
 
     indexmap()
