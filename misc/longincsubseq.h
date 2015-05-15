@@ -9,6 +9,6 @@
  * 
  * Runs in time O(n*log n)
  */
-std::vector<int> longincsubseq(std::vector<int> seq);
+std::vector<int> longincsubseq(const std::vector<int> &seq);
 
 

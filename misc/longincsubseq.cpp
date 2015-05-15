@@ -7,7 +7,7 @@ using std::vector;
  * Do a binary search for the integer j. Such that lowerBound<=j<=upperBound
  * and that maximizes seq[M[j]] while keeping seq[M[j]]<x.
  */
-int bin_search(vector<int> &M, vector<int> &seq, int x, int lowerBound, int upperBound)
+int bin_search(vector<int> &M, const vector<int> &seq, int x, int lowerBound, int upperBound)
 {
 
     int lo = lowerBound;
@@ -37,7 +37,7 @@ vector<int> recreate_solution(vector<int> &P, int ans_length, int final_idx)
 
 }
 
-vector<int> longincsubseq(vector<int> seq)
+vector<int> longincsubseq(const vector<int> &seq)
 {
     int len = seq.size();
     vector<int> M(len + 1);
