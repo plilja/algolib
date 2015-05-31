@@ -7,10 +7,10 @@ int main()
 	scanf("%d %d", &n, &queries);
 	
 	PrimeSieve ps(n);
-	printf("%u\n", ps.num_primes());
+	printf("%u\n", ps.numPrimes());
 	for (int i = 0; i < queries; ++i) {
 		int query;
 		scanf("%d", &query);
-		printf("%d\n", ps.is_prime(query));
+		printf("%d\n", ps.isPrime(query));
 	}
 }

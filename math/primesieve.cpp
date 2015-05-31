@@ -18,7 +18,7 @@ PrimeSieve::PrimeSieve(uint n) : primes(std::vector<bool>(n / 2 + 1, true)), nr_
     }
 }
 
-bool PrimeSieve::is_prime(uint n) const
+bool PrimeSieve::isPrime(uint n) const
 {
     if (n <= 1) {
         return false;
@@ -31,7 +31,7 @@ bool PrimeSieve::is_prime(uint n) const
     }
 }
 
-int PrimeSieve::num_primes()
+int PrimeSieve::numPrimes()
 {
     if (nr_of_primes == -1) {
         nr_of_primes = 0;

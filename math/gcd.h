@@ -28,7 +28,7 @@ struct ExtGcdResult {
 };
 
 template <typename T>
-ExtGcdResult<T> extended_gcd(T a, T b)
+ExtGcdResult<T> extendedGcd(T a, T b)
 {
     T s = 0;
     T t = 1;

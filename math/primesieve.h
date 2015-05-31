@@ -28,12 +28,12 @@ public:
     /*
      * The number of primes in the sieve.
      */
-    int num_primes();
+    int numPrimes();
 
     /*
      * Tells if n is a prime number.
      *
      * Running time O(1)
      */
-    bool is_prime(uint n) const;
+    bool isPrime(uint n) const;
 };
