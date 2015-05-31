@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    indexmap<string> map;
+    Indexmap<string> map;
     while (!cin.eof()) {
         string argument;
         cin >> argument;
@@ -17,11 +17,11 @@ int main()
         if (argument == "index") {
             string data;
             getline(cin, data);
-            cout << map.get_index(data) << endl;
+            cout << map.getIndex(data) << endl;
         } else if (argument == "object") {
             int index;
             scanf("%u\n", &index);
-            cout << map.get_object(index) << endl;
+            cout << map.getObject(index) << endl;
         } else {
             break;
         }
