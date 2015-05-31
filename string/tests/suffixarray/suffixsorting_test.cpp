@@ -19,7 +19,7 @@ int main()
         for (int i = 0; i < n; i++) {
             int tmp;
             cin >> tmp;
-            cout << suff.get_element_at(tmp) << " ";
+            cout << suff.getElementAt(tmp) << " ";
         }
         while ('\n' != cin.get()) {}
         cout << endl;

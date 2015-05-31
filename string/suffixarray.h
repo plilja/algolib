@@ -28,13 +28,13 @@ public:
      *
      * Runs in O(1)
      */
-    int get_element_at(int i);
+    int getElementAt(int i);
 
 private:
     std::string base;
     std::vector<int> sorted;
     int size;
 
-    void suffix_sort();
+    void suffixSort();
 };
 
