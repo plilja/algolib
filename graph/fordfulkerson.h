@@ -45,7 +45,7 @@ struct MinCutEdgesResult {
  * 
  * Runs in time O(|N|*|V|^2)
  */
-FlowResult max_flow(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
+FlowResult maxFlow(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
 
 
 /**
@@ -54,7 +54,7 @@ FlowResult max_flow(const std::vector<FlowEdge> &edges, int nr_of_nodes, int sou
  * Note that the total cost of the edges may not exceed 1000000, if they do, the solution is not guarenteed
  * to be correct.
  */
-MinCostMaxFlowResult min_cost_max_flow(const std::vector<CostFlowEdge> &edges, int nr_of_nodes, int source, int sink);
+MinCostMaxFlowResult minCostMaxFlow(const std::vector<CostFlowEdge> &edges, int nr_of_nodes, int source, int sink);
 
 
 /*
@@ -63,7 +63,7 @@ MinCostMaxFlowResult min_cost_max_flow(const std::vector<CostFlowEdge> &edges, i
  * 
  * Runs in time O(|N|*|V|^2)
  */
-MinCutEdgesResult min_cut_edges(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
+MinCutEdgesResult minCutEdges(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
 
 /*
  * Find a subset of nodes that separates the source from the sink such that the sum of the edges
@@ -71,7 +71,7 @@ MinCutEdgesResult min_cut_edges(const std::vector<FlowEdge> &edges, int nr_of_no
  * 
  * Runs in time O(|N|*|V|^2)
  */
-std::set<int> min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
+std::set<int> minCutNodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink);
 
 
 

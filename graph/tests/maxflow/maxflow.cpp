@@ -18,7 +18,7 @@ int main()
             scanf("%d %d %d", &a, &b, &cost);
             edges.push_back(FlowEdge({a - 1, b - 1, cost}));
         }
-        auto result = max_flow(edges, nr_of_nodes, source, sink);
+        auto result = maxFlow(edges, nr_of_nodes, source, sink);
         printf("%d %d %lu\n", nr_of_nodes, result.flow, result.edges.size());
         for (auto &edge : result.edges) {
             printf("%d %d %d\n", edge.from + 1, edge.to + 1, edge.capacity);

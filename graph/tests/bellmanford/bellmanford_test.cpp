@@ -32,7 +32,7 @@ int main()
                 printf("%d\n", (int)ans);
             }
             printf("Path: ");
-            vector<int> path = bf.get_path(goal);
+            vector<int> path = bf.getPath(goal);
             for (auto v : path) {
                 printf("%d ", v);
             }
