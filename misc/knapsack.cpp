@@ -1,15 +1,8 @@
 #include "knapsack.h"
 #include <vector>
-#include <algorithm>
-#include <limits>
 
 using std::vector;
 using std::pair;
-
-bool by_weight(const pair<pair<int, int>, int> &a, const pair<pair<int, int>, int> &b)
-{
-    return a.first.second < b.first.second;
-}
 
 vector<int> knapsack(vector<pair<int, int>> items, int sack_capacity)
 {

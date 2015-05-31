@@ -24,14 +24,14 @@ void pass(std::string & input)
     pass(input, last_begin_token);
 }
 
-void skip_char(std::string & input)
+void skipChar(std::string & input)
 {
     if (input.length() > 0) {
         input.erase(input.begin());
     }
 }
 
-char peek_char(std::string & input)
+char peekChar(std::string & input)
 {
     if (input.length() > 0) {
         return input[0];
@@ -44,7 +44,7 @@ std::string &error_string()
     return errorstring;
 }
 
-bool remove_pattern(std::string &input, std::string pattern, std::string replace)
+bool removePattern(std::string &input, std::string pattern, std::string replace)
 {
     bool change = false;
     int pos = input.find(pattern, 0);
@@ -57,7 +57,7 @@ bool remove_pattern(std::string &input, std::string pattern, std::string replace
 }
 
 
-int find_first_not_in_parenthesis(std::string input, bool lookFor[256], bool notPrecededBy[256])
+int findFirstNotInParenthesis(std::string input, bool lookFor[256], bool notPrecededBy[256])
 {
     int paramcount = 0;
     if (input[0] == '(') {
@@ -81,7 +81,7 @@ int find_first_not_in_parenthesis(std::string input, bool lookFor[256], bool not
     return -1;
 }
 
-int find_last_not_in_parenthesis(std::string input, bool lookFor[256])
+int findLastNotInParenthesis(std::string input, bool lookFor[256])
 {
     int paramcount = 0;
     if (input[input.length() - 1] == ')') {
@@ -106,7 +106,7 @@ int find_last_not_in_parenthesis(std::string input, bool lookFor[256])
 }
 
 
-void remove_spaces(std::string & s)
+void removeSpaces(std::string & s)
 {
     for (std::string::iterator it = s.begin(); it != s.end(); ++it) {
         for (int i = 0; i < s.length(); ++i) {
