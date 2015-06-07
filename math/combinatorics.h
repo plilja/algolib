@@ -5,7 +5,7 @@ namespace
 {
 
     template<typename T>
-    std::vector <std::vector<T>> all_ways_to_pick(const std::vector <T> &symbols, int num_to_pick, int begin_idx)
+    std::vector <std::vector<T>> allWaysToPick(const std::vector <T> &symbols, int num_to_pick, int begin_idx)
     {
         if (num_to_pick == 0) {
             std::vector <std::vector<T>> result;
@@ -23,8 +23,8 @@ namespace
             return result;
         }
         int first = symbols[begin_idx];
-        auto solutions_excluding_first = all_ways_to_pick(symbols, num_to_pick, begin_idx + 1);
-        auto solutions_including_first = all_ways_to_pick(symbols, num_to_pick - 1, begin_idx + 1);
+        auto solutions_excluding_first = allWaysToPick(symbols, num_to_pick, begin_idx + 1);
+        auto solutions_including_first = allWaysToPick(symbols, num_to_pick - 1, begin_idx + 1);
         for (auto &solution : solutions_including_first) {
             solution.push_back(first);
         }
@@ -35,7 +35,7 @@ namespace
     }
 
     template<typename T>
-    std::set <std::vector<T>> unique_picks(const std::vector <std::vector<int>> &picks)
+    std::set <std::vector<T>> uniquePicks(const std::vector <std::vector<int>> &picks)
     {
         std::set <std::vector<T>> result;
         for (auto &pick : picks) {
@@ -50,10 +50,10 @@ namespace
  * from the symbols provided.
  */
 template<typename T>
-std::set <std::vector<T>> ways_to_pick(const std::vector <T> &symbols, int num_to_pick)
+std::set <std::vector<T>> waysToPick(const std::vector <T> &symbols, int num_to_pick)
 {
-    auto all_picks = all_ways_to_pick(symbols, num_to_pick, 0);
-    return unique_picks<T>(all_picks);
+    auto all_picks = allWaysToPick(symbols, num_to_pick, 0);
+    return uniquePicks<T>(all_picks);
 }
 
 

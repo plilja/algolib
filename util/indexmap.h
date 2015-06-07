@@ -9,14 +9,14 @@
 #include <map>
 
 template<typename T>
-class indexmap
+class Indexmap
 {
 private:
     std::vector <T> ind; //Maps int->T
     std::map<T, int> objects; //Maps T->int
 public:
 
-    indexmap()
+    Indexmap()
     {
     }
 
@@ -30,7 +30,7 @@ public:
      *
      * Runs in time O(1)
      */
-    int get_index(T o)
+    int getIndex(T o)
     {
         std::pair<T, int> p(o, ind.size());
         auto r = objects.insert(p);
@@ -46,7 +46,7 @@ public:
      *
      * Runs in time O(1)
      */
-    T get_object(int i)
+    T getObject(int i)
     {
         return ind[i];
     }

@@ -47,7 +47,7 @@ std::pair <T, T> crt(const std::pair <T, T> &eq1, const std::pair <T, T> &eq2)
     If no solution exists {-1, -1} is returned.
 */
 template<typename T>
-std::pair <T, T> crt_general(const std::pair <T, T> &eq1, const std::pair <T, T> &eq2)
+std::pair <T, T> crtGeneral(const std::pair <T, T> &eq1, const std::pair <T, T> &eq2)
 {
     T common = gcd(eq1.second, eq2.second);
 

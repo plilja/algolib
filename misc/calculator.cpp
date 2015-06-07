@@ -20,7 +20,7 @@ bool num(double &result, std::string input)
     if (input.length() > 0 && input[0] == '-') {
         chars_read = 1;
         number += '-';
-        skip_char(input);
+        skipChar(input);
     }
     while (it != input.end() && *it >= '0' && *it <= '9') {
         number += *it;
@@ -69,7 +69,7 @@ bool factor(double &result, std::string input)
  */
 bool term(double &result, std::string input)
 {
-    int pos = find_last_not_in_parenthesis(input, mult_div);
+    int pos = findLastNotInParenthesis(input, mult_div);
     if (pos == -1) {
         //input is a <factor>
         return factor(result, input);
@@ -105,7 +105,7 @@ bool term(double &result, std::string input)
  */
 bool expression(double &result, std::string input)
 {
-    int pos = find_first_not_in_parenthesis(input, plus_minus, mult_div);
+    int pos = findFirstNotInParenthesis(input, plus_minus, mult_div);
     if (pos == -1) {
         //input was a <term>
         double tmp;
@@ -147,22 +147,22 @@ void reduce(std::string &input)
     bool progress = true;
     while (progress) {
         progress = false;
-        progress = progress || remove_pattern(input, " ", "");
-        progress = progress || remove_pattern(input, "+-", "-");
-        progress = progress || remove_pattern(input, "-+", "-");
-        progress = progress || remove_pattern(input, "--", "+");
-        progress = progress || remove_pattern(input, "++", "+");
-        progress = progress || remove_pattern(input, "(+", "(");
-        progress = progress || remove_pattern(input, "*+", "*");
-        progress = progress || remove_pattern(input, "/+", "/");
+        progress = progress || removePattern(input, " ", "");
+        progress = progress || removePattern(input, "+-", "-");
+        progress = progress || removePattern(input, "-+", "-");
+        progress = progress || removePattern(input, "--", "+");
+        progress = progress || removePattern(input, "++", "+");
+        progress = progress || removePattern(input, "(+", "(");
+        progress = progress || removePattern(input, "*+", "*");
+        progress = progress || removePattern(input, "/+", "/");
     }
 }
 
 double eval(std::string input)
 {
     reduce(input);
-    while (input != "" && peek_char(input) == '+') {
-        skip_char(input);
+    while (input != "" && peekChar(input) == '+') {
+        skipChar(input);
     }
     double ans = 0;
     if (expression(ans, input)) {

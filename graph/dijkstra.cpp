@@ -24,7 +24,7 @@ double Dijkstra::distance(int goal)
     return dist[goal];
 }
 
-vector<int> Dijkstra::get_path(int goal)
+vector<int> Dijkstra::getPath(int goal)
 {
     vector<int> ans;
     if (dist[goal] == -1) {

@@ -30,7 +30,7 @@ int main() {
 		scanf("%d", &num);
 		symbols.push_back(num);
 	}
-	set<vector<int>> result = ways_to_pick(symbols, num_to_pick);
+	set<vector<int>> result = waysToPick(symbols, num_to_pick);
 	vector<string> result_as_strings;
 	for (auto pick : result) {
 		result_as_strings.push_back(vec_to_string(pick));

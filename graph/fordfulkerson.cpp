@@ -26,7 +26,7 @@ struct FFEdge {
     int pi; //potential, used by min cost max flow algorithm
 };
 
-vector<shared_ptr<FFEdge>> find_path(vector<vector<shared_ptr<FFEdge>>> &flow_network, int nr_of_nodes, int source, int sink)
+vector<shared_ptr<FFEdge>> findPath(vector<vector<shared_ptr<FFEdge>>> &flow_network, int nr_of_nodes, int source, int sink)
 {
     vector<shared_ptr<FFEdge>> predecessor(nr_of_nodes, NULL);
     vector<bool> visited(nr_of_nodes, false);
@@ -65,7 +65,7 @@ vector<shared_ptr<FFEdge>> find_path(vector<vector<shared_ptr<FFEdge>>> &flow_ne
  * * Precondition:
  * For every edge in the graph, edge->pi>=0
  */
-vector<shared_ptr<FFEdge>> dijkstra_patched(vector<vector<shared_ptr<FFEdge>>> &flow_network, int nrOfNodes, int source, int sink)
+vector<shared_ptr<FFEdge>> dijkstraPatched(vector<vector<shared_ptr<FFEdge>>> &flow_network, int nrOfNodes, int source, int sink)
 {
     vector<shared_ptr<FFEdge>> parent(nrOfNodes, NULL);
     vector<int> dist(nrOfNodes, MIN_COST_MAX_FLOW_INF);
@@ -114,7 +114,7 @@ vector<shared_ptr<FFEdge>> dijkstra_patched(vector<vector<shared_ptr<FFEdge>>> &
 }
 
 
-int capacity_of_path(const vector<shared_ptr<FFEdge>> &path)
+int capacityOfPath(const vector<shared_ptr<FFEdge>> &path)
 {
     int c = std::numeric_limits<int>::max();
     for (auto &e : path) {
@@ -124,7 +124,7 @@ int capacity_of_path(const vector<shared_ptr<FFEdge>> &path)
 }
 
 template <typename InEdge>
-vector<vector<shared_ptr<FFEdge>>> initialize_flow_network(const vector<InEdge> &edges, int nr_of_nodes)
+vector<vector<shared_ptr<FFEdge>>> initializeFlowNetwork(const vector<InEdge> &edges, int nr_of_nodes)
 {
     vector<vector<shared_ptr<FFEdge>>> flow_network(nr_of_nodes, vector<shared_ptr<FFEdge>>());
     for (auto &flow_edge : edges) {
@@ -163,15 +163,15 @@ vector<vector<shared_ptr<FFEdge>>> initialize_flow_network(const vector<InEdge> 
  * flow network.
  */
 template <typename InEdge, typename PathAlgorithm>
-vector<vector<shared_ptr<FFEdge>>> ford_fulkerson(const vector<InEdge> &edges, int nr_of_nodes, int source, int sink, PathAlgorithm path_algo)
+vector<vector<shared_ptr<FFEdge>>> fordFulkerson(const vector<InEdge> &edges, int nr_of_nodes, int source, int sink, PathAlgorithm path_algo)
 {
-    auto flow_network = initialize_flow_network<InEdge>(edges, nr_of_nodes);
+    auto flow_network = initializeFlowNetwork<InEdge>(edges, nr_of_nodes);
     while (true) {
         vector<shared_ptr<FFEdge>> path = path_algo(flow_network, nr_of_nodes, source, sink);
         if (path.size() == 0) {
             break;
         }
-        int c = capacity_of_path(path);
+        int c = capacityOfPath(path);
         for (auto &e : path) {
             e->f += c;
             e->reverse->f -= c;
@@ -182,7 +182,7 @@ vector<vector<shared_ptr<FFEdge>>> ford_fulkerson(const vector<InEdge> &edges, i
     return flow_network;
 }
 
-int flow_out_of_node(const vector<vector<shared_ptr<FFEdge>>> &flow_network, int n)
+int flowOutOfNode(const vector<vector<shared_ptr<FFEdge>>> &flow_network, int n)
 {
     int flow = 0;
     for (auto e : flow_network[n]) {
@@ -191,9 +191,9 @@ int flow_out_of_node(const vector<vector<shared_ptr<FFEdge>>> &flow_network, int
     return flow;
 }
 
-FlowResult max_flow(const vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
+FlowResult maxFlow(const vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
 {
-    auto flow_network = ford_fulkerson(edges, nr_of_nodes, source, sink, find_path);
+    auto flow_network = fordFulkerson(edges, nr_of_nodes, source, sink, findPath);
 
     //Build the solution
     vector<FlowEdge> output;
@@ -204,13 +204,13 @@ FlowResult max_flow(const vector<FlowEdge> &edges, int nr_of_nodes, int source, 
             }
         }
     }
-    int flow = flow_out_of_node(flow_network, source);
+    int flow = flowOutOfNode(flow_network, source);
     return FlowResult({flow, output});
 }
 
-MinCostMaxFlowResult min_cost_max_flow(const vector<CostFlowEdge> &edges, int nr_of_nodes, int source, int sink)
+MinCostMaxFlowResult minCostMaxFlow(const vector<CostFlowEdge> &edges, int nr_of_nodes, int source, int sink)
 {
-    auto flow_network = ford_fulkerson(edges, nr_of_nodes, source, sink, dijkstra_patched);
+    auto flow_network = fordFulkerson(edges, nr_of_nodes, source, sink, dijkstraPatched);
 
     //Build the solution
     vector<CostFlowEdge> output;
@@ -224,12 +224,12 @@ MinCostMaxFlowResult min_cost_max_flow(const vector<CostFlowEdge> &edges, int nr
             }
         }
     }
-    int flow = flow_out_of_node(flow_network, source);
+    int flow = flowOutOfNode(flow_network, source);
     return MinCostMaxFlowResult({flow, cost, output});
 }
 
 
-vector<bool> reachable_from_source(const vector<vector<shared_ptr<FFEdge>>> &flow_network, int nr_of_nodes, int source)
+vector<bool> reachableFromSource(const vector<vector<shared_ptr<FFEdge>>> &flow_network, int nr_of_nodes, int source)
 {
     queue<int> q;
     vector<bool> d(nr_of_nodes, false);
@@ -249,28 +249,28 @@ vector<bool> reachable_from_source(const vector<vector<shared_ptr<FFEdge>>> &flo
     return d;
 }
 
-MinCutEdgesResult min_cut_edges(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
+MinCutEdgesResult minCutEdges(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
 {
-    auto flow_network = ford_fulkerson(edges, nr_of_nodes, source, sink, find_path);
+    auto flow_network = fordFulkerson(edges, nr_of_nodes, source, sink, findPath);
 
     //Build the solution
-    vector<bool> reachable = reachable_from_source(flow_network, nr_of_nodes, source);
+    vector<bool> reachable = reachableFromSource(flow_network, nr_of_nodes, source);
     vector<FlowEdge> output;
     for (auto &e : edges) {
         if (reachable[e.from] && !reachable[e.to]) {
             output.push_back(e);
         }
     }
-    int cost = flow_out_of_node(flow_network, source); //mincut=maxflow
+    int cost = flowOutOfNode(flow_network, source); //mincut=maxflow
     return MinCutEdgesResult({cost, output});
 }
 
-set<int> min_cut_nodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
+set<int> minCutNodes(const std::vector<FlowEdge> &edges, int nr_of_nodes, int source, int sink)
 {
-    auto flow_network = ford_fulkerson(edges, nr_of_nodes, source, sink, find_path);
+    auto flow_network = fordFulkerson(edges, nr_of_nodes, source, sink, findPath);
 
     //Build the solution
-    vector<bool> reachable = reachable_from_source(flow_network, nr_of_nodes, source);
+    vector<bool> reachable = reachableFromSource(flow_network, nr_of_nodes, source);
     set<int> output;
     for (int i = 0; i < nr_of_nodes; i++) {
         if (reachable[i]) {

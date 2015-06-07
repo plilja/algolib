@@ -18,7 +18,7 @@ void dfs(int starting_point, deque<int> &visited_order_stack, vector<bool> &visi
     visited_order_stack.push_front(starting_point);
 }
 
-void build_reverse_graph(const vector <vector<int>> &graph, vector <vector<int>> &reverse_graph)
+void buildReverseGraph(const vector <vector<int>> &graph, vector <vector<int>> &reverse_graph)
 {
     for (unsigned int i = 0; i < graph.size(); ++i) {
         auto v = graph[i];
@@ -40,7 +40,7 @@ vector <set<int>> scc(const vector <vector<int>> &graph)
     }
 
     vector <vector<int>> reverse_graph(graph.size(), vector<int>());
-    build_reverse_graph(graph, reverse_graph);
+    buildReverseGraph(graph, reverse_graph);
     visited = vector<bool>(graph.size(), false);
     vector <set<int>> result;
     while (!s.empty()) {

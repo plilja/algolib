@@ -26,7 +26,7 @@ double BellmanFord::distance(int goal)
     return dist[goal];
 }
 
-vector<int> BellmanFord::get_path(int goal)
+vector<int> BellmanFord::getPath(int goal)
 {
     vector<int> path;
     if (dist[goal] == INF || dist[goal] == NINF) {

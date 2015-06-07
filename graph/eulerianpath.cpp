@@ -12,7 +12,7 @@ using std::list;
  * Check if we can reach overy other (non isolated) node in a graph from a given
  * start node.   
  */
-bool check_connectivity(vector<list<int> > adj_list, int nr_of_nodes, int startNode)
+bool checkConnectivity(vector<list<int> > adj_list, int nr_of_nodes, int startNode)
 {
     vector<bool> visited(nr_of_nodes, false);
     visited[startNode] = true;
@@ -51,7 +51,7 @@ bool check_connectivity(vector<list<int> > adj_list, int nr_of_nodes, int startN
  * if 0 is the return value the variable start will be updated with a 
  * node that is suitable to start in.  
  */
-int check_existance(int nr_of_nodes, vector <list<int>> adj_list, int &start, int &end)
+int checkExistance(int nr_of_nodes, vector <list<int>> adj_list, int &start, int &end)
 {
     vector<int> in_degree(nr_of_nodes, 0);
     vector<int> out_degree(nr_of_nodes, 0);
@@ -88,7 +88,7 @@ int check_existance(int nr_of_nodes, vector <list<int>> adj_list, int &start, in
         {
             if (adj_list[i].size() > 0) {
                 start = i;
-                if (check_connectivity(adj_list, nr_of_nodes, i)) {
+                if (checkConnectivity(adj_list, nr_of_nodes, i)) {
                     return 0;
                 } else {
                     return -1;
@@ -102,7 +102,7 @@ int check_existance(int nr_of_nodes, vector <list<int>> adj_list, int &start, in
     if (start == -1 || end == -1) {
         return -1;
     } else {
-        if (check_connectivity(adj_list, nr_of_nodes, start)) {
+        if (checkConnectivity(adj_list, nr_of_nodes, start)) {
             return 1;
         } else {
             return -1;
@@ -110,7 +110,7 @@ int check_existance(int nr_of_nodes, vector <list<int>> adj_list, int &start, in
     }
 }
 
-inline vector<int> to_vec(list<int> &l) {
+inline vector<int> toVec(list<int> &l) {
     return vector<int>(l.begin(), l.end());
 }
 
@@ -122,7 +122,7 @@ EulerianPathResult eulerpath(const vector <std::pair<int, int>> &edges, int nr_o
         adj_list[edge.first].push_back(edge.second);
     }
     int start_node, end_node;
-    int exists = check_existance(nr_of_nodes, adj_list,  start_node, end_node);
+    int exists = checkExistance(nr_of_nodes, adj_list,  start_node, end_node);
     if (exists == -1) {
         return EulerianPathResult({false, vector<int>()});
     }
@@ -162,5 +162,5 @@ EulerianPathResult eulerpath(const vector <std::pair<int, int>> &edges, int nr_o
         }
     }
 
-    return EulerianPathResult({true, to_vec(path)});
+    return EulerianPathResult({true, toVec(path)});
 }

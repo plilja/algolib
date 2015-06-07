@@ -14,7 +14,7 @@ int main()
 
         cin >> a >> n1 >> b >> n2;
 
-        auto ans = crt_general<long long>({a, n1}, {b, n2});
+        auto ans = crtGeneral<long long>({a, n1}, {b, n2});
 
         if (ans.second == -1) {
             cout << "no solution" << endl;

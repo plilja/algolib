@@ -31,7 +31,7 @@ int main()
         } else if (ans == MULTIPLE || ans == SUCCESS) {
             for (int i = 0; i < n; ++i) {
                 if (x[i].first) {
-                    if (is_zero(x[i].second)) {
+                    if (isZero(x[i].second)) {
                         printf("0.0000");
                     } else {
                         printf("%.4lf ", x[i].second);

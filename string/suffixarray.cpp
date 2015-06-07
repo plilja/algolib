@@ -13,15 +13,15 @@ typedef long long int ll;
 Suffixarray::Suffixarray(const string &s) : base(s), sorted(s.length()), size(s.length())
 {
     assert(size < MAX_STRING_LENGTH);
-    suffix_sort();
+    suffixSort();
 }
 
-int Suffixarray::get_element_at(int i)
+int Suffixarray::getElementAt(int i)
 {
     return sorted[i];
 }
 
-void Suffixarray::suffix_sort()
+void Suffixarray::suffixSort()
 {
     vector <pair<ll, int>> suff(size);
     vector <ll> rank(size);
@@ -50,7 +50,6 @@ void Suffixarray::suffix_sort()
         //Now sort the array in chunks. They were determined in the previous round.
         old_rank = rank[suff[0].second];
         ll start_pos = 0;
-        ll end_pos = 0;
         for (int j = 1; j < size; j++) {
             if (old_rank < rank[suff[j].second]) {
                 old_rank = rank[suff[j].second];

@@ -29,7 +29,7 @@ int main()
                 printf("%d\n", ans);
             }
             printf("Path: ");
-            vector<int> path = dj.get_path(goal);
+            vector<int> path = dj.getPath(goal);
             for (auto v : path) {
                 printf("%d ", v);
             }

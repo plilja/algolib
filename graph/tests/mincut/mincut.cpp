@@ -17,7 +17,7 @@ int main()
             scanf("%d %d %d", &a, &b, &cost);
             edges.push_back(FlowEdge({a, b, cost}));
         }
-        auto result = min_cut_nodes(edges, nr_of_nodes, source, sink);
+        auto result = minCutNodes(edges, nr_of_nodes, source, sink);
         printf("%lu\n", result.size());
         for (auto node : result) {
             printf("%d\n", node);

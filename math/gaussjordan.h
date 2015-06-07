@@ -11,44 +11,44 @@ enum GaussJordanResult {
 };
 
 template <typename T>
-bool is_zero(T v)
+bool isZero(T v)
 {
     return v==0;
 }
 
 template <>
-bool is_zero<long double>(long double v)
+bool isZero<long double>(long double v)
 {
     long double absv = v < 0 ? -v : v;
     return absv < 0.00000000001;
 }
 
 template <>
-bool is_zero<double>(double v)
+bool isZero<double>(double v)
 {
     return fabs(v) < 0.00000001;
 }
 
 template <>
-bool is_zero<float>(float v)
+bool isZero<float>(float v)
 {
     return fabs(v) < 0.0000001;
 }
 
 
 template <typename T>
-GaussJordanResult is_zero_system(const std::vector<std::vector<T> > &A, const std::vector<T> &y)
+GaussJordanResult isZeroSystem(const std::vector<std::vector<T> > &A, const std::vector<T> &y)
 {
     uint dim=A.size();
     for(uint i=0; i<dim; ++i) {
         for(uint j=0; j<dim; ++j) {
-            if(!is_zero(A[i][j])) {
+            if(!isZero(A[i][j])) {
                 return MATRIX_NOT_ZERO;
             }
         }
     }
     for(uint i=0; i<dim; ++i) {
-        if(!is_zero(y[i])) {
+        if(!isZero(y[i])) {
             return INCONSISTENT;
         }
     }
@@ -56,11 +56,11 @@ GaussJordanResult is_zero_system(const std::vector<std::vector<T> > &A, const st
 }
 
 template <typename T>
-int find_pivot(uint column, uint next_row, const std::vector<std::vector<T>* > &A)
+int findPivot(uint column, uint next_row, const std::vector<std::vector<T>* > &A)
 {
     uint dim=A.size();
     for(uint j=next_row; j<dim; ++j) {
-        if(!is_zero((*A[j])[column])) {
+        if(!isZero((*A[j])[column])) {
             return j;
         }
     }
@@ -71,7 +71,7 @@ int find_pivot(uint column, uint next_row, const std::vector<std::vector<T>* > &
 template <typename T>
 GaussJordanResult gaussjordan(std::vector<std::vector<T> > A, std::vector<T> y, std::vector<T> &x)
 {
-    auto c = is_zero_system(A, y);
+    auto c = isZeroSystem(A, y);
     if(c == INCONSISTENT) {
         return INCONSISTENT;
     }
@@ -92,7 +92,7 @@ GaussJordanResult gaussjordan(std::vector<std::vector<T> > A, std::vector<T> y, 
     int pivot_pos;
     bool linear_independent_lines=true;
     for(uint i = 0; i < dim; ++i) {
-        pivot_pos=find_pivot(i, next_row, _A);
+        pivot_pos=findPivot(i, next_row, _A);
         if(pivot_pos == -1) {
             linear_independent_lines=false;
             continue;
@@ -113,12 +113,12 @@ GaussJordanResult gaussjordan(std::vector<std::vector<T> > A, std::vector<T> y, 
             for(uint z = i+1; z < dim; ++z)
             {
                 (*_A[j])[z] -= (*_A[next_row])[z] * factor;
-                line_is_zero = line_is_zero && is_zero((*_A[j])[z]); 
+                line_is_zero = line_is_zero && isZero((*_A[j])[z]); 
             }
             if(line_is_zero)
             {
                 linear_independent_lines=false;
-                if(!is_zero(y[j]))
+                if(!isZero(y[j]))
                 {
                     return INCONSISTENT;
                 }
@@ -153,7 +153,7 @@ template <typename T>
 GaussJordanResult gaussjordanplus(std::vector<std::vector<T> > A, std::vector<T> y, std::vector<std::pair<bool,T> > &x)
 {
     uint dim = A.size();
-    auto c = is_zero_system(A, y);
+    auto c = isZeroSystem(A, y);
     if(c == INCONSISTENT) {
         return INCONSISTENT;
     }
@@ -173,7 +173,7 @@ GaussJordanResult gaussjordanplus(std::vector<std::vector<T> > A, std::vector<T>
     int pivot_pos;
     bool linear_independent_lines = true;
     for(uint i = 0; i < dim; ++i) {
-        pivot_pos = find_pivot(i, next_row, _A);
+        pivot_pos = findPivot(i, next_row, _A);
         if(pivot_pos == -1)
         {
             linear_independent_lines = false;
@@ -195,12 +195,12 @@ GaussJordanResult gaussjordanplus(std::vector<std::vector<T> > A, std::vector<T>
             for(uint z = i + 1; z <  dim; ++z)
             {
                 (*_A[j])[z] -= (*_A[next_row])[z] * factor;
-                line_is_zero = line_is_zero && is_zero((*_A[j])[z]); 
+                line_is_zero = line_is_zero && isZero((*_A[j])[z]); 
             }
             if(line_is_zero)
             {
                 linear_independent_lines = false;
-                if(!is_zero(y[j]))
+                if(!isZero(y[j]))
                 {
                     return INCONSISTENT;
                 }
@@ -215,7 +215,7 @@ GaussJordanResult gaussjordanplus(std::vector<std::vector<T> > A, std::vector<T>
         for(int i = dim - 1; i > 0; --i) {
             bool zero_line = true;
             for(int j = dim - 1; j >= 0; --j) {
-                if(!is_zero((*_A[i])[j])) {
+                if(!isZero((*_A[i])[j])) {
                     zero_line = false;
                     next_col = j;
                     break;
@@ -241,7 +241,7 @@ GaussJordanResult gaussjordanplus(std::vector<std::vector<T> > A, std::vector<T>
             uint nr_of_not_zeros = 0;
             uint pos = 0;
             for(uint j = 0; j < dim; ++j) {
-                bool is_not_zero = !is_zero((*_A[i])[j]);
+                bool is_not_zero = !isZero((*_A[i])[j]);
                 nr_of_not_zeros += is_not_zero;
                 if(is_not_zero) {
                     pos = j;

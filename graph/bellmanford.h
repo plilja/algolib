@@ -24,7 +24,7 @@ public:
      * Get a path, if it exists, between the source and some node. If no path exists, an empty list
      * is returned.
      */
-    std::vector<int> get_path(int goal);
+    std::vector<int> getPath(int goal);
 
     /*
      * Get the best distance between the source and a goal node.

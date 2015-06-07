@@ -20,12 +20,12 @@ void pass(std::string &input, std::string &token);
 /*
  * Remove the next char of the string input. 
  */
-void skip_char(std::string &input);
+void skipChar(std::string &input);
 
 /*
  * Peek on the next char of the string input.
  */
-char peek_char(std::string &input);
+char peekChar(std::string &input);
 
 /*
  * Replaces every occurence of pattern in input be
@@ -33,7 +33,7 @@ char peek_char(std::string &input);
  * 
  * Returns true if any changes were made, false otherwise. 
  */
-bool remove_pattern(std::string &input, std::string pattern, std::string replace);
+bool removePattern(std::string &input, std::string pattern, std::string replace);
 
 /*
  * Find the last occurence of a char that has value 1 in
@@ -44,7 +44,7 @@ bool remove_pattern(std::string &input, std::string pattern, std::string replace
  * 
  * Returns the index of the first such occurence. 
  */
-int find_last_not_in_parenthesis(std::string input, bool lookFor[256]);
+int findLastNotInParenthesis(std::string input, bool lookFor[256]);
 
 /*
  * Find the first occurence of a char that has value 1 in
@@ -56,7 +56,7 @@ int find_last_not_in_parenthesis(std::string input, bool lookFor[256]);
  * 
  * Returns the index of the first such occurence. 
  */
-int find_first_not_in_parenthesis(std::string input, bool lookFor[256], bool notPrecededBy[256]);
+int findFirstNotInParenthesis(std::string input, bool lookFor[256], bool notPrecededBy[256]);
 
 
 //has a one at char '+' and cha '-'

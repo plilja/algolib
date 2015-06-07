@@ -4,7 +4,7 @@
 using std::vector;
 using std::pair;
 
-int cross_product(const pair<int, int> &x, const pair<int, int> &y, const pair<int, int> &z)
+int crossProduct(const pair<int, int> &x, const pair<int, int> &y, const pair<int, int> &z)
 {
     return (y.first - x.first) * (z.second - x.second) -
            (z.first - x.first) * (y.second - x.second);
@@ -29,11 +29,11 @@ PointInPolyResult pointinpoly(pair<int, int> p, const vector<pair<int, int>> &po
         if (p2 == p1)
             continue; //ignore duplicate consecutives
 
-        int cross_prod = cross_product(p, p1, p2);
+        int cross_prod = crossProduct(p, p1, p2);
         if (p1.second < p2.second)
-            cross_prod = cross_product(p, p1, p2);
+            cross_prod = crossProduct(p, p1, p2);
         else
-            cross_prod = cross_product(p, p2, p1);
+            cross_prod = crossProduct(p, p2, p1);
         if (p.second >= std::min(p1.second, p2.second) &&
             p.second <= std::max(p1.second, p2.second) &&
             p.first <= std::max(p1.first, p2.first)) {

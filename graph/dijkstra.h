@@ -21,7 +21,7 @@ public:
      * a path between the nodes doesn't exist the list will be empty. If The goal node
      * is the same as the source node, the list will simply contain this node.
      */
-    std::vector<int> get_path(int goal);
+    std::vector<int> getPath(int goal);
 
     /*
      * Get the distance between the source and a goal node.
