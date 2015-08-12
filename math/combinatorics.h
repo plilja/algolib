@@ -35,7 +35,7 @@ namespace
     }
 
     template<typename T>
-    std::set <std::vector<T>> uniquePicks(const std::vector <std::vector<int>> &picks)
+    std::set <std::vector<T>> uniquePicks(const std::vector <std::vector<T>> &picks)
     {
         std::set <std::vector<T>> result;
         for (auto &pick : picks) {
