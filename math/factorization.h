@@ -66,9 +66,9 @@ std::vector<T> prime_factors(T x)
 }
 
 /**
- * Finds all the divisors of a number (regardless if they are prime factors or not).
+ * Returns all the divisors of a positive number in increasing order.
  *
- * Returns answer in increasing order. 
+ * Returns divisors regardless if they are prime factors or not.
  *
  * Example: divsors(12) == [1,2,3,4,6,12]
  */
@@ -88,8 +88,7 @@ std::vector<T> divisors(T x)
             powers.push_back(acc);
         }
         int curr_size = ans.size();
-        for (int i = 0; i < curr_size; ++i)
-        {
+        for (int i = 0; i < curr_size; ++i) {
             for (auto &power : powers) {
                 ans.push_back(ans[i] * power);
             }
