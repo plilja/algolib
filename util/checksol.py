@@ -24,7 +24,7 @@ program = args.program
 if program[0] != '.':
     program = "./" + program
 
-f = file(program)
+f = open(program)
 
 program_path = os.path.dirname(program) 
 if args.directory:
@@ -43,18 +43,18 @@ try:
         test_exp_file = test_file.replace(".in", ".ans")
         if not filecmp.cmp(test_exp_file, "answer.tmp"):
             success = False
-            print test_file + ", FAILED"
+            print(test_file + ", FAILED")
         elif args.verbose:
-            print test_file + ", succes"
+            print(test_file + ", succes")
         if args.verbose:
-            print test_file + ", execution time = " + str(end - start)
+            print(test_file + ", execution time = " + str(end - start))
 finally:
     if os.path.isfile("answer.tmp"):
         os.remove("answer.tmp")
 
 if not tests_found:
-    print "No test files found"
+    print("No test files found")
 elif success:
-    print "Success"
+    print("Success")
 
 

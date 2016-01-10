@@ -11,7 +11,7 @@ program = sys.argv[1]
 if program[0] != '.':
     program = "./" + program
 
-f = file(program)
+f = open(program)
 
 program_path = os.path.dirname(program) 
 test_search_path = program_path + "/test/*.in"
