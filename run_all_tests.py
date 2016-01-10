@@ -42,7 +42,8 @@ for root, dirs, files in os.walk('.'):
     if root.endswith('tests'):
         dir_names = [root + "/" + d for d in os.listdir(root)]
         dir_names = filter(os.path.isdir, dir_names)
-        map(run_tests_in_dir, dir_names)
+        for d in dir_names:
+            run_tests_in_dir(d)
 
 
 
