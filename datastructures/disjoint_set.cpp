@@ -1,6 +1,7 @@
 #include "disjoint_set.h"
 #include <vector>
 #include <cassert>
+#include <cstdio>
 
 DisjointSet::DisjointSet(int size)
 {
