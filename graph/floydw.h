@@ -19,7 +19,7 @@ public:
      * 			edge between i and j. If no edge exists between i and j, wt[i][j] must equal
      * 			std::numeric_limits<int>::max().
      */
-    Floydw(std::vector <std::vector<double>> wt, int n);
+    Floydw(const std::vector<std::vector<double>> &wt, int n);
 
     /*
      * Get the minimum distance between two nodes.

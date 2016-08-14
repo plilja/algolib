@@ -6,7 +6,7 @@ const int NEG_INF = std::numeric_limits<int>::min();
 
 using std::vector;
 
-Floydw::Floydw(std::vector<std::vector<double>> wt, int _n) : dist(wt), n(_n) {
+Floydw::Floydw(const std::vector<std::vector<double>> &wt, int _n) : dist(wt), n(_n) {
     for (int i = 0; i < n; i++) {
         dist[i][i] = std::min(0.0, wt[i][i]);
     }
