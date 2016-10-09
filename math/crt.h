@@ -104,7 +104,7 @@ std::pair<T, T> crtGeneral(std::vector<std::pair<T, T> > &eqs) {
     }
     auto a = eqs.back();
     eqs.pop_back();
-    auto b = eqs.front();
+    auto b = eqs.back();
     eqs.pop_back();
     std::pair<T, T> eq1 = {a.first, a.second};
     std::pair<T, T> eq2 = {b.first, b.second};
