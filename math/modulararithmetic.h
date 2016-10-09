@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cassert>
+#include "gcd.h"
 
 /*
  * A class for modular arithmetic. 
@@ -37,9 +38,6 @@ class Mod
 		
 		bool operator == (const Mod<T> &rhs) const;
 		bool operator != (const Mod<T> &rhs) const;
-		
-		// Returns a pair, such that pair.first * a + pair.second * b = gcd(a, b)
-		static std::pair<T, T> euclid(T a, T b);
 		
 		// Returns the current value
 		T getValue() const;
@@ -118,9 +116,9 @@ const Mod<T> Mod<T>::operator / (const Mod<T> &rhs) const
 	if(size != rhs.getSize())
 		assert(!"Can't use operator / with elements using different modulus. ");
 	
-	std::pair<T, T> p = euclid(size, rhs.getValue());
+	auto p = extendedGcd(size, rhs.getValue());
 	
-	if (p.first * size + p.second * rhs.getValue() > 1) {
+	if (p.a * size + p.b * rhs.getValue() > 1) {
 		// Multiplicative inverse does not exist
 		Mod<T> aux(-1, size);
 		aux.value = -1;
@@ -129,7 +127,7 @@ const Mod<T> Mod<T>::operator / (const Mod<T> &rhs) const
 	}
 	
 	else {
-		return Mod<T>(value * p.second, size);
+		return Mod<T>(value * p.b, size);
 	}
 }
 
@@ -201,25 +199,4 @@ template <typename T>
 T Mod<T>::getSize() const
 {
 	return size;
-}
-
-template <typename T>
-std::pair<T, T> Mod<T>::euclid(T a, T b)
-{
-	if (a == 0) {
-		return std::make_pair(0, 1);
-	}
-	
-	if (b == 0) {
-		return std::make_pair(1, 0);
-	}
-	
-	std::pair<T, T> p = euclid(b, a % b);
-	
-	T y = p.first;
-	T x = p.second;
-	p.first = x;
-	p.second = y - (a / b) * x;
-	
-	return p;
 }
