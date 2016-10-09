@@ -33,6 +33,7 @@
 *.project
 *.cdt*
 *.swp
+*.pyc
 
 bin/
 Debug/
@@ -40,3 +41,5 @@ Contents/
 .idea
 
 *.bak
+
+excluded/
