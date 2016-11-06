@@ -56,5 +56,6 @@ if not tests_found:
     print("No test files found")
 elif success:
     print("Success")
-
+else:
+    print("Failed (%s)" % program)
 
