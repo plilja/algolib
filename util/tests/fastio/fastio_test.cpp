@@ -1,4 +1,4 @@
-#include "../../fastio.cpp"
+#include "../../fastio.h"
 
 int main() {
     int n = readInt();

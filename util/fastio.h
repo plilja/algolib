@@ -1,4 +1,4 @@
-#include "stdio.h"
+#include <stdio.h>
 
 /**
  * Marginally faster way to read integers than scanf. Usable 
