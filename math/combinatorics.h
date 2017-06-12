@@ -24,7 +24,7 @@ namespace
             result.push_back(list);
             return result;
         }
-        int first = symbols[begin_idx];
+        T first = symbols[begin_idx];
         auto solutions_excluding_first = allWaysToPick(symbols, num_to_pick, begin_idx + 1);
         auto solutions_including_first = allWaysToPick(symbols, num_to_pick - 1, begin_idx + 1);
         for (auto &solution : solutions_including_first) {
